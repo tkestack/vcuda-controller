@@ -1,11 +1,12 @@
 /*
- * Tencent is pleased to support the open source community by making TKEStack available.
+ * Tencent is pleased to support the open source community by making TKEStack
+ * available.
  *
  * Copyright (C) 2012-2019 Tencent. All Rights Reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use
- * this file except in compliance with the License. You may obtain a copy of the
- * License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
  * https://opensource.org/licenses/Apache-2.0
  *
@@ -1503,6 +1504,24 @@ CUresult cuMemcpyAtoA_v2(CUarray dstArray, size_t dstOffset, CUarray srcArray,
 CUresult cuMemcpyAtoA(CUarray dstArray, size_t dstOffset, CUarray srcArray,
                       size_t srcOffset, size_t ByteCount) {
   return CUDA_ENTRY_CALL(cuda_library_entry, cuMemcpyAtoA, dstArray, dstOffset,
+                         srcArray, srcOffset, ByteCount);
+}
+
+CUresult cuMemcpyAtoD(CUdeviceptr dstDevice, CUarray srcArray, size_t srcOffset,
+                      size_t ByteCount) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemcpyAtoD, dstDevice, srcArray,
+                         srcOffset, ByteCount);
+}
+
+CUresult cuMemcpyAtoD_v2(CUdeviceptr dstDevice, CUarray srcArray,
+                         size_t srcOffset, size_t ByteCount) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemcpyAtoD_v2, dstDevice,
+                         srcArray, srcOffset, ByteCount);
+}
+
+CUresult cuMemcpyAtoD_v2_ptds(CUdeviceptr dstDevice, CUarray srcArray,
+                              size_t srcOffset, size_t ByteCount) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemcpyAtoD_v2_ptds, dstDevice,
                          srcArray, srcOffset, ByteCount);
 }
 
