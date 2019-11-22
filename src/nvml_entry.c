@@ -1,11 +1,12 @@
 /*
- * Tencent is pleased to support the open source community by making TKEStack available.
+ * Tencent is pleased to support the open source community by making TKEStack
+ * available.
  *
  * Copyright (C) 2012-2019 Tencent. All Rights Reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use
- * this file except in compliance with the License. You may obtain a copy of the
- * License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
  * https://opensource.org/licenses/Apache-2.0
  *
@@ -246,6 +247,12 @@ nvmlReturn_t nvmlDeviceGetCreatableVgpus(nvmlDevice_t device,
                          device, vgpuCount, vgpuTypeIds);
 }
 
+nvmlReturn_t nvmlDeviceGetCudaComputeCapability(nvmlDevice_t device, int *major,
+                                                int *minor) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetCudaComputeCapability,
+                         device, major, minor);
+}
+
 nvmlReturn_t nvmlDeviceGetCurrentClocksThrottleReasons(
     nvmlDevice_t device, unsigned long long *clocksThrottleReasons) {
   return NVML_ENTRY_CALL(nvml_library_entry,
@@ -305,6 +312,13 @@ nvmlReturn_t nvmlDeviceGetDriverModel(nvmlDevice_t device,
                                       nvmlDriverModel_t *current,
                                       nvmlDriverModel_t *pending) {
   return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetDriverModel, device,
+                         current, pending);
+}
+
+nvmlReturn_t nvmlDeviceGetEccMode(nvmlDevice_t device,
+                                  nvmlEnableState_t *current,
+                                  nvmlEnableState_t *pending) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetEccMode, device,
                          current, pending);
 }
 
@@ -420,6 +434,7 @@ nvmlReturn_t nvmlDeviceGetInforomConfigurationChecksum(nvmlDevice_t device,
                          nvmlDeviceGetInforomConfigurationChecksum, device,
                          checksum);
 }
+
 nvmlReturn_t nvmlDeviceGetInforomImageVersion(nvmlDevice_t device,
                                               char *version,
                                               unsigned int length) {
@@ -447,6 +462,7 @@ nvmlReturn_t nvmlDeviceGetMaxCustomerBoostClock(nvmlDevice_t device,
   return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetMaxCustomerBoostClock,
                          device, clockType, clockMHz);
 }
+
 nvmlReturn_t nvmlDeviceGetMaxPcieLinkGeneration(nvmlDevice_t device,
                                                 unsigned int *maxLinkGen) {
   return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetMaxPcieLinkGeneration,
@@ -672,6 +688,7 @@ nvmlReturn_t nvmlDeviceGetSupportedEventTypes(nvmlDevice_t device,
   return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetSupportedEventTypes,
                          device, eventTypes);
 }
+
 nvmlReturn_t nvmlDeviceGetSupportedGraphicsClocks(nvmlDevice_t device,
                                                   unsigned int memoryClockMHz,
                                                   unsigned int *count,
