@@ -5,7 +5,7 @@ set -o nounset
 set -o xtrace
 
 ROOT=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd -P)
-IMAGE_FILE=${IMAGE_FILE:-"tkestack.io/gaia/vcuda:latest"}
+IMAGE_FILE=${IMAGE_FILE:-"vcuda-controller:latest"}
 
 function cleanup() {
     rm -rf ${ROOT}/cuda-control.tar
