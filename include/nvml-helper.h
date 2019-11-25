@@ -1,11 +1,12 @@
 /*
- * Tencent is pleased to support the open source community by making TKEStack available.
+ * Tencent is pleased to support the open source community by making TKEStack
+ * available.
  *
  * Copyright (C) 2012-2019 Tencent. All Rights Reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use
- * this file except in compliance with the License. You may obtain a copy of the
- * License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
  * https://opensource.org/licenses/Apache-2.0
  *
@@ -451,6 +452,14 @@ typedef enum {
   NVML_ENTRY_ENUM(nvmlGetVgpuVersion),
   /** nvmlSetVgpuVersion */
   NVML_ENTRY_ENUM(nvmlSetVgpuVersion),
+  /** nvmlDeviceGetGridLicensableFeatures_v3 */
+  NVML_ENTRY_ENUM(nvmlDeviceGetGridLicensableFeatures_v3),
+  /** nvmlDeviceGetHostVgpuMode */
+  NVML_ENTRY_ENUM(nvmlDeviceGetHostVgpuMode),
+  /** nvmlDeviceGetPgpuMetadataString */
+  NVML_ENTRY_ENUM(nvmlDeviceGetPgpuMetadataString),
+  /** nvmlVgpuInstanceGetEccMode */
+  NVML_ENTRY_ENUM(nvmlVgpuInstanceGetEccMode),
 
   NVML_ENTRY_END
 } nvml_entry_enum_t;

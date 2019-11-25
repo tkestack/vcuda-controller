@@ -1,11 +1,12 @@
 /*
- * Tencent is pleased to support the open source community by making TKEStack available.
+ * Tencent is pleased to support the open source community by making TKEStack
+ * available.
  *
  * Copyright (C) 2012-2019 Tencent. All Rights Reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use
- * this file except in compliance with the License. You may obtain a copy of the
- * License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
  * https://opensource.org/licenses/Apache-2.0
  *
@@ -457,6 +458,23 @@ entry_t cuda_library_entry[] = {
     {.name = "cuStreamGetCaptureInfo"},
     {.name = "cuStreamGetCaptureInfo_ptsz"},
     {.name = "cuThreadExchangeStreamCaptureMode"},
+    {.name = "cuDeviceGetNvSciSyncAttributes"},
+    {.name = "cuGraphExecHostNodeSetParams"},
+    {.name = "cuGraphExecMemcpyNodeSetParams"},
+    {.name = "cuGraphExecMemsetNodeSetParams"},
+    {.name = "cuGraphExecUpdate"},
+    {.name = "cuMemAddressFree"},
+    {.name = "cuMemAddressReserve"},
+    {.name = "cuMemCreate"},
+    {.name = "cuMemExportToShareableHandle"},
+    {.name = "cuMemGetAccess"},
+    {.name = "cuMemGetAllocationGranularity"},
+    {.name = "cuMemGetAllocationPropertiesFromHandle"},
+    {.name = "cuMemImportFromShareableHandle"},
+    {.name = "cuMemMap"},
+    {.name = "cuMemRelease"},
+    {.name = "cuMemSetAccess"},
+    {.name = "cuMemUnmap"},
 };
 
 entry_t nvml_library_entry[] = {
@@ -662,6 +680,10 @@ entry_t nvml_library_entry[] = {
     {.name = "nvmlVgpuTypeGetMaxInstancesPerVm"},
     {.name = "nvmlGetVgpuVersion"},
     {.name = "nvmlSetVgpuVersion"},
+    {.name = "nvmlDeviceGetGridLicensableFeatures_v3"},
+    {.name = "nvmlDeviceGetHostVgpuMode"},
+    {.name = "nvmlDeviceGetPgpuMetadataString"},
+    {.name = "nvmlVgpuInstanceGetEccMode"},
 };
 
 static void UNUSED bug_on() {

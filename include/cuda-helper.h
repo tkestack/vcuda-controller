@@ -1,11 +1,12 @@
 /*
- * Tencent is pleased to support the open source community by making TKEStack available.
+ * Tencent is pleased to support the open source community by making TKEStack
+ * available.
  *
  * Copyright (C) 2012-2019 Tencent. All Rights Reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use
- * this file except in compliance with the License. You may obtain a copy of the
- * License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
  * https://opensource.org/licenses/Apache-2.0
  *
@@ -909,6 +910,40 @@ typedef enum {
   CUDA_ENTRY_ENUM(cuStreamGetCaptureInfo_ptsz),
   /** cuThreadExchangeStreamCaptureMode */
   CUDA_ENTRY_ENUM(cuThreadExchangeStreamCaptureMode),
+  /** cuDeviceGetNvSciSyncAttributes */
+  CUDA_ENTRY_ENUM(cuDeviceGetNvSciSyncAttributes),
+  /** cuGraphExecHostNodeSetParams */
+  CUDA_ENTRY_ENUM(cuGraphExecHostNodeSetParams),
+  /** cuGraphExecMemcpyNodeSetParams */
+  CUDA_ENTRY_ENUM(cuGraphExecMemcpyNodeSetParams),
+  /** cuGraphExecMemsetNodeSetParams */
+  CUDA_ENTRY_ENUM(cuGraphExecMemsetNodeSetParams),
+  /** cuGraphExecUpdate */
+  CUDA_ENTRY_ENUM(cuGraphExecUpdate),
+  /** cuMemAddressFree */
+  CUDA_ENTRY_ENUM(cuMemAddressFree),
+  /** cuMemAddressReserve */
+  CUDA_ENTRY_ENUM(cuMemAddressReserve),
+  /** cuMemCreate */
+  CUDA_ENTRY_ENUM(cuMemCreate),
+  /** cuMemExportToShareableHandle */
+  CUDA_ENTRY_ENUM(cuMemExportToShareableHandle),
+  /** cuMemGetAccess */
+  CUDA_ENTRY_ENUM(cuMemGetAccess),
+  /** cuMemGetAllocationGranularity */
+  CUDA_ENTRY_ENUM(cuMemGetAllocationGranularity),
+  /** cuMemGetAllocationPropertiesFromHandle */
+  CUDA_ENTRY_ENUM(cuMemGetAllocationPropertiesFromHandle),
+  /** cuMemImportFromShareableHandle */
+  CUDA_ENTRY_ENUM(cuMemImportFromShareableHandle),
+  /** cuMemMap */
+  CUDA_ENTRY_ENUM(cuMemMap),
+  /** cuMemRelease */
+  CUDA_ENTRY_ENUM(cuMemRelease),
+  /** cuMemSetAccess */
+  CUDA_ENTRY_ENUM(cuMemSetAccess),
+  /** cuMemUnmap */
+  CUDA_ENTRY_ENUM(cuMemUnmap),
 
   CUDA_ENTRY_END
 } cuda_entry_enum_t;

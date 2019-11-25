@@ -1307,3 +1307,30 @@ nvmlReturn_t nvmlGetVgpuVersion(nvmlVgpuVersion_t *supported,
 nvmlReturn_t nvmlSetVgpuVersion(nvmlVgpuVersion_t *vgpuVersion) {
   return NVML_ENTRY_CALL(nvml_library_entry, nvmlSetVgpuVersion, vgpuVersion);
 }
+
+nvmlReturn_t nvmlDeviceGetGridLicensableFeatures_v3(
+    nvmlDevice_t device,
+    nvmlGridLicensableFeatures_t *pGridLicensableFeatures) {
+  return NVML_ENTRY_CALL(nvml_library_entry,
+                         nvmlDeviceGetGridLicensableFeatures_v3, device,
+                         pGridLicensableFeatures);
+}
+
+nvmlReturn_t nvmlDeviceGetHostVgpuMode(nvmlDevice_t device,
+                                       nvmlHostVgpuMode_t *pHostVgpuMode) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetHostVgpuMode, device,
+                         pHostVgpuMode);
+}
+
+nvmlReturn_t nvmlDeviceGetPgpuMetadataString(nvmlDevice_t device,
+                                             char *pgpuMetadata,
+                                             unsigned int *bufferSize) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetPgpuMetadataString,
+                         device, pgpuMetadata, bufferSize);
+}
+
+nvmlReturn_t nvmlVgpuInstanceGetEccMode(nvmlVgpuInstance_t vgpuInstance,
+                                        nvmlEnableState_t *eccMode) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlVgpuInstanceGetEccMode,
+                         vgpuInstance, eccMode);
+}

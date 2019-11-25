@@ -1917,6 +1917,129 @@ typedef struct CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st {
   unsigned int reserved[16];
 } CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS;
 
+typedef unsigned long long CUmemGenericAllocationHandle;
+
+typedef enum CUgraphExecUpdateResult_enum {
+  CU_GRAPH_EXEC_UPDATE_SUCCESS = 0x0, /**< The update succeeded */
+  CU_GRAPH_EXEC_UPDATE_ERROR =
+      0x1, /**< The update failed for an unexpected reason which is described in
+              the return value of the function */
+  CU_GRAPH_EXEC_UPDATE_ERROR_TOPOLOGY_CHANGED =
+      0x2, /**< The update failed because the topology changed */
+  CU_GRAPH_EXEC_UPDATE_ERROR_NODE_TYPE_CHANGED =
+      0x3, /**< The update failed because a node type changed */
+  CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED =
+      0x4, /**< The update failed because the function of a kernel node changed
+            */
+  CU_GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED =
+      0x5, /**< The update failed because the parameters changed in a way that
+              is not supported */
+  CU_GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED =
+      0x6 /**< The update failed because something about the node is not
+             supported */
+} CUgraphExecUpdateResult;
+
+/**
+ * Defines the allocation types available
+ */
+typedef enum CUmemAllocationType_enum {
+  CU_MEM_ALLOCATION_TYPE_INVALID = 0x0,
+
+  /** This allocation type is 'pinned', i.e. cannot migrate from its current
+   * location while the application is actively using it
+   */
+  CU_MEM_ALLOCATION_TYPE_PINNED = 0x1,
+  CU_MEM_ALLOCATION_TYPE_MAX = 0xFFFFFFFF
+} CUmemAllocationType;
+
+/**
+ * Flags for specifying particular handle types
+ */
+typedef enum CUmemAllocationHandleType_enum {
+  CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR =
+      0x1, /**< Allows a file descriptor to be used for exporting. Permitted
+              only on POSIX systems. (int) */
+  CU_MEM_HANDLE_TYPE_WIN32 =
+      0x2, /**< Allows a Win32 NT handle to be used for exporting. (HANDLE) */
+  CU_MEM_HANDLE_TYPE_WIN32_KMT = 0x4, /**< Allows a Win32 KMT handle to be used
+                                         for exporting. (D3DKMT_HANDLE) */
+  CU_MEM_HANDLE_TYPE_MAX = 0xFFFFFFFF
+} CUmemAllocationHandleType;
+
+/**
+ * Specifies the type of location
+ */
+typedef enum CUmemLocationType_enum {
+  CU_MEM_LOCATION_TYPE_INVALID = 0x0,
+  CU_MEM_LOCATION_TYPE_DEVICE =
+      0x1, /**< Location is a device location, thus id is a device ordinal */
+  CU_MEM_LOCATION_TYPE_MAX = 0xFFFFFFFF
+} CUmemLocationType;
+
+/**
+ * Specifies a location for an allocation.
+ */
+typedef struct CUmemLocation_st {
+  CUmemLocationType type; /**< Specifies the location type, which modifies the
+                             meaning of id. */
+  int id; /**< identifier for a given this location's ::CUmemLocationType. */
+} CUmemLocation;
+
+/**
+ * Specifies the allocation properties for a allocation.
+ */
+typedef struct CUmemAllocationProp_st {
+  /** Allocation type */
+  CUmemAllocationType type;
+  /** requested ::CUmemAllocationHandleType */
+  CUmemAllocationHandleType requestedHandleTypes;
+  /** Location of allocation */
+  CUmemLocation location;
+  /**
+   * Windows-specific LPSECURITYATTRIBUTES required when
+   * ::CU_MEM_HANDLE_TYPE_WIN32 is specified.  This security attribute defines
+   * the scope of which exported allocations may be tranferred to other
+   * processes.  In all other cases, this field is required to be zero.
+   */
+  void *win32HandleMetaData;
+  /** Reserved for future use, must be zero */
+  unsigned long long reserved;
+} CUmemAllocationProp;
+
+/**
+ * Flag for requesting different optimal and required granularities for an
+ * allocation.
+ */
+typedef enum CUmemAllocationGranularity_flags_enum {
+  CU_MEM_ALLOC_GRANULARITY_MINIMUM =
+      0x0, /**< Minimum required granularity for allocation */
+  CU_MEM_ALLOC_GRANULARITY_RECOMMENDED =
+      0x1 /**< Recommended granularity for allocation for best performance */
+} CUmemAllocationGranularity_flags;
+
+/**
+ * Specifies the memory protection flags for mapping.
+ */
+typedef enum CUmemAccess_flags_enum {
+  CU_MEM_ACCESS_FLAGS_PROT_NONE =
+      0x0, /**< Default, make the address range not accessible */
+  CU_MEM_ACCESS_FLAGS_PROT_READ =
+      0x1, /**< Make the address range read accessible */
+  CU_MEM_ACCESS_FLAGS_PROT_READWRITE =
+      0x3, /**< Make the address range read-write accessible */
+  CU_MEM_ACCESS_FLAGS_PROT_MAX = 0xFFFFFFFF
+} CUmemAccess_flags;
+
+/**
+ * Memory access descriptor
+ */
+typedef struct CUmemAccessDesc_st {
+  CUmemLocation location; /**< Location on which the request is to change it's
+                             accessibility */
+  CUmemAccess_flags
+      flags; /**< ::CUmemProt accessibility flags to set on the request */
+} CUmemAccessDesc;
+
 #ifdef __cplusplus
 }
 #endif

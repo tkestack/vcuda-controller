@@ -2258,3 +2258,109 @@ CUresult cuThreadExchangeStreamCaptureMode(CUstreamCaptureMode *mode) {
   return CUDA_ENTRY_CALL(cuda_library_entry, cuThreadExchangeStreamCaptureMode,
                          mode);
 }
+
+CUresult cuDeviceGetNvSciSyncAttributes(void *nvSciSyncAttrList, CUdevice dev,
+                                        int flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuDeviceGetNvSciSyncAttributes,
+                         nvSciSyncAttrList, dev, flags);
+}
+
+CUresult cuGraphExecHostNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode,
+                                      const CUDA_HOST_NODE_PARAMS *nodeParams) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphExecHostNodeSetParams,
+                         hGraphExec, hNode, nodeParams);
+}
+
+CUresult cuGraphExecMemcpyNodeSetParams(CUgraphExec hGraphExec,
+                                        CUgraphNode hNode,
+                                        const CUDA_MEMCPY3D *copyParams,
+                                        CUcontext ctx) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphExecMemcpyNodeSetParams,
+                         hGraphExec, hNode, copyParams, ctx);
+}
+
+CUresult cuGraphExecMemsetNodeSetParams(
+    CUgraphExec hGraphExec, CUgraphNode hNode,
+    const CUDA_MEMSET_NODE_PARAMS *memsetParams, CUcontext ctx) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphExecMemsetNodeSetParams,
+                         hGraphExec, hNode, memsetParams, ctx);
+}
+
+CUresult cuGraphExecUpdate(CUgraphExec hGraphExec, CUgraph hGraph,
+                           CUgraphNode *hErrorNode_out,
+                           CUgraphExecUpdateResult *updateResult_out) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphExecUpdate, hGraphExec,
+                         hGraph, hErrorNode_out, updateResult_out);
+}
+
+CUresult cuMemAddressFree(CUdeviceptr ptr, size_t size) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemAddressFree, ptr, size);
+}
+
+CUresult cuMemAddressReserve(CUdeviceptr *ptr, size_t size, size_t alignment,
+                             CUdeviceptr addr, unsigned long long flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemAddressReserve, ptr, size,
+                         alignment, addr, flags);
+}
+
+CUresult cuMemCreate(CUmemGenericAllocationHandle *handle, size_t size,
+                     const CUmemAllocationProp *prop,
+                     unsigned long long flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemCreate, handle, size, prop,
+                         flags);
+}
+
+CUresult cuMemExportToShareableHandle(void *shareableHandle,
+                                      CUmemGenericAllocationHandle handle,
+                                      CUmemAllocationHandleType handleType,
+                                      unsigned long long flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemExportToShareableHandle,
+                         shareableHandle, handle, handleType, flags);
+}
+
+CUresult cuMemGetAccess(unsigned long long *flags,
+                        const CUmemLocation *location, CUdeviceptr ptr) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemGetAccess, flags, location,
+                         ptr);
+}
+
+CUresult cuMemGetAllocationGranularity(
+    size_t *granularity, const CUmemAllocationProp *prop,
+    CUmemAllocationGranularity_flags option) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemGetAllocationGranularity,
+                         granularity, prop, option);
+}
+
+CUresult cuMemGetAllocationPropertiesFromHandle(
+    CUmemAllocationProp *prop, CUmemGenericAllocationHandle handle) {
+  return CUDA_ENTRY_CALL(cuda_library_entry,
+                         cuMemGetAllocationPropertiesFromHandle, prop, handle);
+}
+
+CUresult cuMemImportFromShareableHandle(
+    CUmemGenericAllocationHandle *handle, void *osHandle,
+    CUmemAllocationHandleType shHandleType) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemImportFromShareableHandle,
+                         handle, osHandle, shHandleType);
+}
+
+CUresult cuMemMap(CUdeviceptr ptr, size_t size, size_t offset,
+                  CUmemGenericAllocationHandle handle,
+                  unsigned long long flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemMap, ptr, size, offset,
+                         handle, flags);
+}
+
+CUresult cuMemRelease(CUmemGenericAllocationHandle handle) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemRelease, handle);
+}
+
+CUresult cuMemSetAccess(CUdeviceptr ptr, size_t size,
+                        const CUmemAccessDesc *desc, size_t count) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemSetAccess, ptr, size, desc,
+                         count);
+}
+
+CUresult cuMemUnmap(CUdeviceptr ptr, size_t size) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuMemUnmap, ptr, size);
+}
