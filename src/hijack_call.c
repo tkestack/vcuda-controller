@@ -187,7 +187,7 @@ int delta(int up_limit, int user_current, int share) {
       g_sm_num * g_sm_num * g_max_thread_per_sm * utilization_diff / 2560;
   /* Accelerate cuda cores allocation when utilization vary widely */
   if (utilization_diff > up_limit / 2) {
-    increment = increment * utilization_diff * 2 / up_limit;
+    increment = increment * utilization_diff * 2 / (up_limit + 1);
   }
 
   if (user_current <= up_limit) {
