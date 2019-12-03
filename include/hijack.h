@@ -1,11 +1,12 @@
 /*
- * Tencent is pleased to support the open source community by making TKEStack available.
+ * Tencent is pleased to support the open source community by making TKEStack
+ * available.
  *
  * Copyright (C) 2012-2019 Tencent. All Rights Reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use
- * this file except in compliance with the License. You may obtain a copy of the
- * License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
  * https://opensource.org/licenses/Apache-2.0
  *
@@ -101,6 +102,9 @@ extern "C" {
 #define CHANGE_LIMIT_INTERVAL (30)
 #define USAGE_THRESHOLD (5)
 
+#define GET_VALID_VALUE(x) (((x) >= 0 && (x) <= 100) ? (x) : 0)
+#define CODEC_NORMALIZE(x) (x * 85 / 100)
+
 typedef struct {
   void *fn_ptr;
   char *name;
@@ -165,13 +169,14 @@ int read_controller_configuration();
 void load_necessary_data();
 
 /**
-* Register data to remote controller to retrieve configuration
+ * Register data to remote controller to retrieve configuration
  *
  * @param bus_id bus is of GPU card
  * @param pod_uid  pod uid of Pod
  * @param container_name container name of Pod
  */
-void register_to_remote_with_data(const char *bus_id, const char *pod_uid, const char *container_name);
+void register_to_remote_with_data(const char *bus_id, const char *pod_uid,
+                                  const char *container_name);
 
 /**
  * Tell whether we're using old method to find controller configuration path
