@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(hijack C CXX)
 
 add_definitions(-D_GNU_SOURCE)
-add_compile_options(-Wall -Wshadow -Werror)
+add_compile_options(-Wall -Wshadow -Werror -Wno-format)
 
 include_directories(${CMAKE_SOURCE_DIR})
 

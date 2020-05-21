@@ -885,14 +885,12 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
    * remove unnecessary chars from $container_id and $pod_uid
    */
   if (is_systemd) {
-    prune_pos = strstr(container_id, "docker-");
+    prune_pos = strstr(container_id, "-");
     if (!prune_pos) {
-      LOGGER(4, "no docker- prefix");
+      LOGGER(4, "no - prefix");
       goto DONE;
     }
-    prune_pos += strlen("docker-");
-    memmove(container_id, prune_pos, strlen(prune_pos));
-    container_id[strlen(prune_pos)] = '\0';
+    memmove(container_id, prune_pos+1, strlen(container_id));
 
     prune_pos = strstr(pod_uid, "-pod");
     if (!prune_pos) {
