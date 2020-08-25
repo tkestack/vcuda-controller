@@ -460,6 +460,72 @@ typedef enum {
   NVML_ENTRY_ENUM(nvmlDeviceGetPgpuMetadataString),
   /** nvmlVgpuInstanceGetEccMode */
   NVML_ENTRY_ENUM(nvmlVgpuInstanceGetEccMode),
+  /** nvmlComputeInstanceDestroy */
+  NVML_ENTRY_ENUM(nvmlComputeInstanceDestroy),
+  /** nvmlComputeInstanceGetInfo */
+  NVML_ENTRY_ENUM(nvmlComputeInstanceGetInfo),
+  /** nvmlDeviceCreateGpuInstance */
+  NVML_ENTRY_ENUM(nvmlDeviceCreateGpuInstance),
+  /** nvmlDeviceGetArchitecture */
+  NVML_ENTRY_ENUM(nvmlDeviceGetArchitecture),
+  /** nvmlDeviceGetAttributes */
+  NVML_ENTRY_ENUM(nvmlDeviceGetAttributes),
+  /** nvmlDeviceGetAttributes_v2 */
+  NVML_ENTRY_ENUM(nvmlDeviceGetAttributes_v2),
+  /** nvmlDeviceGetComputeInstanceId */
+  NVML_ENTRY_ENUM(nvmlDeviceGetComputeInstanceId),
+  /** nvmlDeviceGetCpuAffinityWithinScope */
+  NVML_ENTRY_ENUM(nvmlDeviceGetCpuAffinityWithinScope),
+  /** nvmlDeviceGetDeviceHandleFromMigDeviceHandle */
+  NVML_ENTRY_ENUM(nvmlDeviceGetDeviceHandleFromMigDeviceHandle),
+  /** nvmlDeviceGetGpuInstanceById */
+  NVML_ENTRY_ENUM(nvmlDeviceGetGpuInstanceById),
+  /** nvmlDeviceGetGpuInstanceId */
+  NVML_ENTRY_ENUM(nvmlDeviceGetGpuInstanceId),
+  /** nvmlDeviceGetGpuInstancePossiblePlacements */
+  NVML_ENTRY_ENUM(nvmlDeviceGetGpuInstancePossiblePlacements),
+  /** nvmlDeviceGetGpuInstanceProfileInfo */
+  NVML_ENTRY_ENUM(nvmlDeviceGetGpuInstanceProfileInfo),
+  /** nvmlDeviceGetGpuInstanceRemainingCapacity */
+  NVML_ENTRY_ENUM(nvmlDeviceGetGpuInstanceRemainingCapacity),
+  /** nvmlDeviceGetGpuInstances */
+  NVML_ENTRY_ENUM(nvmlDeviceGetGpuInstances),
+  /** nvmlDeviceGetMaxMigDeviceCount */
+  NVML_ENTRY_ENUM(nvmlDeviceGetMaxMigDeviceCount),
+  /** nvmlDeviceGetMemoryAffinity */
+  NVML_ENTRY_ENUM(nvmlDeviceGetMemoryAffinity),
+  /** nvmlDeviceGetMigDeviceHandleByIndex */
+  NVML_ENTRY_ENUM(nvmlDeviceGetMigDeviceHandleByIndex),
+  /** nvmlDeviceGetMigMode */
+  NVML_ENTRY_ENUM(nvmlDeviceGetMigMode),
+  /** nvmlDeviceGetRemappedRows */
+  NVML_ENTRY_ENUM(nvmlDeviceGetRemappedRows),
+  /** nvmlDeviceGetRowRemapperHistogram */
+  NVML_ENTRY_ENUM(nvmlDeviceGetRowRemapperHistogram),
+  /** nvmlDeviceIsMigDeviceHandle */
+  NVML_ENTRY_ENUM(nvmlDeviceIsMigDeviceHandle),
+  /** nvmlDeviceSetMigMode */
+  NVML_ENTRY_ENUM(nvmlDeviceSetMigMode),
+  /** nvmlEventSetWait_v2 */
+  NVML_ENTRY_ENUM(nvmlEventSetWait_v2),
+  /** nvmlGpuInstanceCreateComputeInstance */
+  NVML_ENTRY_ENUM(nvmlGpuInstanceCreateComputeInstance),
+  /** nvmlGpuInstanceDestroy */
+  NVML_ENTRY_ENUM(nvmlGpuInstanceDestroy),
+  /** nvmlGpuInstanceGetComputeInstanceById */
+  NVML_ENTRY_ENUM(nvmlGpuInstanceGetComputeInstanceById),
+  /** nvmlGpuInstanceGetComputeInstanceProfileInfo */
+  NVML_ENTRY_ENUM(nvmlGpuInstanceGetComputeInstanceProfileInfo),
+  /** nvmlGpuInstanceGetComputeInstanceRemainingCapacity */
+  NVML_ENTRY_ENUM(nvmlGpuInstanceGetComputeInstanceRemainingCapacity),
+  /** nvmlGpuInstanceGetComputeInstances */
+  NVML_ENTRY_ENUM(nvmlGpuInstanceGetComputeInstances),
+  /** nvmlGpuInstanceGetInfo */
+  NVML_ENTRY_ENUM(nvmlGpuInstanceGetInfo),
+  /** nvmlVgpuInstanceClearAccountingPids */
+  NVML_ENTRY_ENUM(nvmlVgpuInstanceClearAccountingPids),
+  /** nvmlVgpuInstanceGetMdevUUID */
+  NVML_ENTRY_ENUM(nvmlVgpuInstanceGetMdevUUID),
 
   NVML_ENTRY_END
 } nvml_entry_enum_t;

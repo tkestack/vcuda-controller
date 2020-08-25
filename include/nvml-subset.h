@@ -86,37 +86,37 @@ typedef struct nvmlProcessInfo_st {
 typedef enum nvmlReturn_enum {
   NVML_SUCCESS = 0,  //!< The operation was successful
   NVML_ERROR_UNINITIALIZED =
-      1,  //!< NVML was not first initialized with nvmlInit()
+  1,  //!< NVML was not first initialized with nvmlInit()
   NVML_ERROR_INVALID_ARGUMENT = 2,  //!< A supplied argument is invalid
   NVML_ERROR_NOT_SUPPORTED =
-      3,  //!< The requested operation is not available on target device
+  3,  //!< The requested operation is not available on target device
   NVML_ERROR_NO_PERMISSION =
-      4,  //!< The current user does not have permission for operation
+  4,  //!< The current user does not have permission for operation
   NVML_ERROR_ALREADY_INITIALIZED = 5,  //!< Deprecated: Multiple initializations
-                                       //! are now allowed through ref counting
+  //! are now allowed through ref counting
   NVML_ERROR_NOT_FOUND = 6,  //!< A query to find an object was unsuccessful
   NVML_ERROR_INSUFFICIENT_SIZE = 7,  //!< An input argument is not large enough
   NVML_ERROR_INSUFFICIENT_POWER =
-      8,  //!< A device's external power cables are not properly attached
+  8,  //!< A device's external power cables are not properly attached
   NVML_ERROR_DRIVER_NOT_LOADED = 9,  //!< NVIDIA driver is not loaded
   NVML_ERROR_TIMEOUT = 10,           //!< User provided timeout passed
   NVML_ERROR_IRQ_ISSUE =
-      11,  //!< NVIDIA Kernel detected an interrupt issue with a GPU
+  11,  //!< NVIDIA Kernel detected an interrupt issue with a GPU
   NVML_ERROR_LIBRARY_NOT_FOUND =
-      12,  //!< NVML Shared Library couldn't be found or loaded
+  12,  //!< NVML Shared Library couldn't be found or loaded
   NVML_ERROR_FUNCTION_NOT_FOUND =
-      13,  //!< Local version of NVML doesn't implement this function
+  13,  //!< Local version of NVML doesn't implement this function
   NVML_ERROR_CORRUPTED_INFOROM = 14,  //!< infoROM is corrupted
   NVML_ERROR_GPU_IS_LOST = 15,        //!< The GPU has fallen off the bus or has
-                                      //! otherwise become inaccessible
+  //! otherwise become inaccessible
   NVML_ERROR_RESET_REQUIRED =
-      16,  //!< The GPU requires a reset before it can be used again
+  16,  //!< The GPU requires a reset before it can be used again
   NVML_ERROR_OPERATING_SYSTEM = 17,  //!< The GPU control device has been
-                                     //! blocked by the operating system/cgroups
+  //! blocked by the operating system/cgroups
   NVML_ERROR_LIB_RM_VERSION_MISMATCH =
-      18,                  //!< RM detects a driver/library version mismatch
+  18,                  //!< RM detects a driver/library version mismatch
   NVML_ERROR_IN_USE = 19,  //!< An operation cannot be performed because the GPU
-                           //! is currently in use
+  //! is currently in use
   NVML_ERROR_NO_DATA = 20,  //!< No data
   NVML_ERROR_UNKNOWN = 999  //!< An internal driver error occurred
 } nvmlReturn_t;
@@ -169,9 +169,9 @@ typedef struct nvmlProcessUtilizationSample_st {
  */
 typedef enum nvmlEccCounterType_enum {
   NVML_VOLATILE_ECC =
-      0,  //!< Volatile counts are reset each time the driver loads.
+  0,  //!< Volatile counts are reset each time the driver loads.
   NVML_AGGREGATE_ECC = 1,  //!< Aggregate counts persist across reboots (i.e.
-                           //!< for the lifetime of the device)
+  //!< for the lifetime of the device)
 
   // Keep this last
   NVML_ECC_COUNTER_TYPE_COUNT  //!< Count of memory counter types
@@ -228,13 +228,13 @@ typedef unsigned int nvmlVgpuInstance_t;
  */
 typedef enum nvmlRestrictedAPI_enum {
   NVML_RESTRICTED_API_SET_APPLICATION_CLOCKS =
-      0,  //!< APIs that change application clocks, see
-          //!< nvmlDeviceSetApplicationsClocks
-          //!< and see nvmlDeviceResetApplicationsClocks
+  0,  //!< APIs that change application clocks, see
+  //!< nvmlDeviceSetApplicationsClocks
+  //!< and see nvmlDeviceResetApplicationsClocks
   NVML_RESTRICTED_API_SET_AUTO_BOOSTED_CLOCKS =
-      1,  //!< APIs that enable/disable Auto Boosted clocks
-          //!< see nvmlDeviceSetAutoBoostedClocksEnabled
-          // Keep this last
+  1,  //!< APIs that enable/disable Auto Boosted clocks
+  //!< see nvmlDeviceSetAutoBoostedClocksEnabled
+  // Keep this last
   NVML_RESTRICTED_API_COUNT
 } nvmlRestrictedAPI_t;
 
@@ -330,13 +330,13 @@ typedef enum nvmlClockId_enum {
  */
 typedef enum nvmlComputeMode_enum {
   NVML_COMPUTEMODE_DEFAULT =
-      0,  //!< Default compute mode -- multiple contexts per device
+  0,  //!< Default compute mode -- multiple contexts per device
   NVML_COMPUTEMODE_EXCLUSIVE_THREAD = 1,  //!< Support Removed
   NVML_COMPUTEMODE_PROHIBITED =
-      2,  //!< Compute-prohibited mode -- no contexts per device
+  2,  //!< Compute-prohibited mode -- no contexts per device
   NVML_COMPUTEMODE_EXCLUSIVE_PROCESS =
-      3,  //!< Compute-exclusive-process mode -- only one context per device,
-          //!< usable from multiple threads at a time
+  3,  //!< Compute-exclusive-process mode -- only one context per device,
+  //!< usable from multiple threads at a time
 
   // Keep this last
   NVML_COMPUTEMODE_COUNT
@@ -366,9 +366,9 @@ typedef struct nvmlEccErrorCounts_st {
  */
 typedef enum nvmlDriverModel_enum {
   NVML_DRIVER_WDDM =
-      0,  //!< WDDM driver model -- GPU treated as a display device
+  0,  //!< WDDM driver model -- GPU treated as a display device
   NVML_DRIVER_WDM =
-      1  //!< WDM (TCC) model (recommended) -- GPU treated as a generic device
+  1  //!< WDM (TCC) model (recommended) -- GPU treated as a generic device
 } nvmlDriverModel_t;
 
 /*
@@ -457,7 +457,7 @@ typedef enum nvmlGom_enum {
   NVML_GOM_ALL_ON = 0,  //!< Everything is enabled and running at full speed
 
   NVML_GOM_COMPUTE =
-      1,  //!< Designed for running only compute tasks. Graphics operations
+  1,  //!< Designed for running only compute tasks. Graphics operations
   //!< are not allowed
 
   NVML_GOM_LOW_DP = 2  //!< Designed for running graphics applications that
@@ -495,7 +495,7 @@ typedef struct nvmlGridLicensableFeatures_st {
 typedef enum nvmlInforomObject_enum {
   NVML_INFOROM_OEM = 0,  //!< An object defined by OEM
   NVML_INFOROM_ECC =
-      1,  //!< The ECC object determining the level of ECC support
+  1,  //!< The ECC object determining the level of ECC support
   NVML_INFOROM_POWER = 2,  //!< The power management object
 
   // Keep this last
@@ -567,7 +567,7 @@ typedef enum nvmlNvLinkCapability_enum {
   NVML_NVLINK_CAP_SYSMEM_ATOMICS = 3,  // System memory atomics are supported
   NVML_NVLINK_CAP_SLI_BRIDGE = 4,      // SLI is supported over this link
   NVML_NVLINK_CAP_VALID = 5,           // Link is supported on this device
-                                       // should be last
+  // should be last
   NVML_NVLINK_CAP_COUNT
 } nvmlNvLinkCapability_t;
 
@@ -577,11 +577,11 @@ typedef enum nvmlNvLinkCapability_enum {
 typedef enum nvmlNvLinkErrorCounter_enum {
   NVML_NVLINK_ERROR_DL_REPLAY = 0,  // Data link transmit replay error counter
   NVML_NVLINK_ERROR_DL_RECOVERY =
-      1,  // Data link transmit recovery error counter
+  1,  // Data link transmit recovery error counter
   NVML_NVLINK_ERROR_DL_CRC_FLIT =
-      2,  // Data link receive flow control digit CRC error counter
+  2,  // Data link receive flow control digit CRC error counter
   NVML_NVLINK_ERROR_DL_CRC_DATA =
-      3,  // Data link receive data CRC error counter
+  3,  // Data link receive data CRC error counter
 
   // this must be last
   NVML_NVLINK_ERROR_COUNT
@@ -687,9 +687,9 @@ typedef enum nvmlPStates_enum {
  */
 typedef enum nvmlPageRetirementCause_enum {
   NVML_PAGE_RETIREMENT_CAUSE_MULTIPLE_SINGLE_BIT_ECC_ERRORS =
-      0,  //!< Page was retired due to multiple single bit ECC error
+  0,  //!< Page was retired due to multiple single bit ECC error
   NVML_PAGE_RETIREMENT_CAUSE_DOUBLE_BIT_ECC_ERROR =
-      1,  //!< Page was retired due to double bit ECC error
+  1,  //!< Page was retired due to double bit ECC error
 
   // Keep this last
   NVML_PAGE_RETIREMENT_CAUSE_COUNT
@@ -701,15 +701,15 @@ typedef enum nvmlPageRetirementCause_enum {
 typedef enum nvmlSamplingType_enum {
   NVML_TOTAL_POWER_SAMPLES = 0,  //!< To represent total power drawn by GPU
   NVML_GPU_UTILIZATION_SAMPLES =
-      1,  //!< To represent percent of time during which one or more kernels was
-          //!< executing on the GPU
+  1,  //!< To represent percent of time during which one or more kernels was
+  //!< executing on the GPU
   NVML_MEMORY_UTILIZATION_SAMPLES =
-      2,  //!< To represent percent of time during which global (device) memory
-          //!< was being read or written
+  2,  //!< To represent percent of time during which global (device) memory
+  //!< was being read or written
   NVML_ENC_UTILIZATION_SAMPLES =
-      3,  //!< To represent percent of time during which NVENC remains busy
+  3,  //!< To represent percent of time during which NVENC remains busy
   NVML_DEC_UTILIZATION_SAMPLES =
-      4,  //!< To represent percent of time during which NVDEC remains busy
+  4,  //!< To represent percent of time during which NVDEC remains busy
   NVML_PROCESSOR_CLK_SAMPLES = 5,  //!< To represent processor clock samples
   NVML_MEMORY_CLK_SAMPLES = 6,     //!< To represent memory clock samples
 
@@ -740,14 +740,14 @@ typedef enum nvmlTemperatureSensors_enum {
  */
 typedef enum nvmlTemperatureThresholds_enum {
   NVML_TEMPERATURE_THRESHOLD_SHUTDOWN = 0,  // Temperature at which the GPU will
-                                            // shut down for HW protection
+  // shut down for HW protection
   NVML_TEMPERATURE_THRESHOLD_SLOWDOWN =
-      1,  // Temperature at which the GPU will begin HW slowdown
+  1,  // Temperature at which the GPU will begin HW slowdown
   NVML_TEMPERATURE_THRESHOLD_MEM_MAX =
-      2,  // Memory Temperature at which the GPU will begin SW slowdown
+  2,  // Memory Temperature at which the GPU will begin SW slowdown
   NVML_TEMPERATURE_THRESHOLD_GPU_MAX =
-      3,  // GPU Temperature at which the GPU can be throttled below base clock
-          // Keep this last
+  3,  // GPU Temperature at which the GPU can be throttled below base clock
+  // Keep this last
   NVML_TEMPERATURE_THRESHOLD_COUNT
 } nvmlTemperatureThresholds_t;
 
@@ -758,13 +758,13 @@ typedef enum nvmlTemperatureThresholds_enum {
 typedef enum nvmlGpuLevel_enum {
   NVML_TOPOLOGY_INTERNAL = 0,  // e.g. Tesla K80
   NVML_TOPOLOGY_SINGLE =
-      10,  // all devices that only need traverse a single PCIe switch
+  10,  // all devices that only need traverse a single PCIe switch
   NVML_TOPOLOGY_MULTIPLE =
-      20,  // all devices that need not traverse a host bridge
+  20,  // all devices that need not traverse a host bridge
   NVML_TOPOLOGY_HOSTBRIDGE =
-      30,  // all devices that are connected to the same host bridge
+  30,  // all devices that are connected to the same host bridge
   NVML_TOPOLOGY_NODE = 40,    // all devices that are connected to the same NUMA
-                              // node but possibly multiple host bridges
+  // node but possibly multiple host bridges
   NVML_TOPOLOGY_SYSTEM = 50,  // all devices in the system
 
   // there is purposefully no COUNT here because of the need for spacing above
@@ -790,7 +790,7 @@ typedef struct nvmlVgpuPgpuMetadata_st {
   unsigned int version;   //!< Current version of the structure
   unsigned int revision;  //!< Current revision of the structure
   char hostDriverVersion
-      [NVML_SYSTEM_DRIVER_VERSION_BUFFER_SIZE];  //!< Host driver version
+  [NVML_SYSTEM_DRIVER_VERSION_BUFFER_SIZE];  //!< Host driver version
   unsigned int
       pgpuVirtualizationCaps;   //!< Pgpu virtualizaion capabilities bitfileld
   unsigned int reserved[7];     //!< Reserved for internal use
@@ -830,25 +830,25 @@ typedef struct nvmlVgpuInstanceUtilizationSample_st {
  */
 typedef enum nvmlPerfPolicyType_enum {
   NVML_PERF_POLICY_POWER = 0,  //!< How long did power violations cause the GPU
-                               //!< to be below application clocks
+  //!< to be below application clocks
   NVML_PERF_POLICY_THERMAL = 1,  //!< How long did thermal violations cause the
-                                 //!< GPU to be below application clocks
+  //!< GPU to be below application clocks
   NVML_PERF_POLICY_SYNC_BOOST = 2,   //!< How long did sync boost cause the GPU
-                                     //!< to be below application clocks
+  //!< to be below application clocks
   NVML_PERF_POLICY_BOARD_LIMIT = 3,  //!< How long did the board limit cause the
-                                     //!< GPU to be below application clocks
+  //!< GPU to be below application clocks
   NVML_PERF_POLICY_LOW_UTILIZATION =
-      4,  //!< How long did low utilization cause the GPU to be below
-          //!< application clocks
+  4,  //!< How long did low utilization cause the GPU to be below
+  //!< application clocks
   NVML_PERF_POLICY_RELIABILITY =
-      5,  //!< How long did the board reliability limit cause the GPU to be
+  5,  //!< How long did the board reliability limit cause the GPU to be
   //!< below application clocks
 
   NVML_PERF_POLICY_TOTAL_APP_CLOCKS =
-      10,  //!< Total time the GPU was held below application clocks by any
-           //!< limiter (0 - 5 above)
+  10,  //!< Total time the GPU was held below application clocks by any
+  //!< limiter (0 - 5 above)
   NVML_PERF_POLICY_TOTAL_BASE_CLOCKS =
-      11,  //!< Total time the GPU was held below base clocks
+  11,  //!< Total time the GPU was held below base clocks
 
   // Keep this last
   NVML_PERF_POLICY_COUNT
@@ -869,13 +869,13 @@ typedef struct nvmlViolationTime_st {
 typedef enum nvmlGpuVirtualizationMode {
   NVML_GPU_VIRTUALIZATION_MODE_NONE = 0,  //!< Represents Bare Metal GPU
   NVML_GPU_VIRTUALIZATION_MODE_PASSTHROUGH =
-      1,  //!< Device is associated with GPU-Passthorugh
+  1,  //!< Device is associated with GPU-Passthorugh
   NVML_GPU_VIRTUALIZATION_MODE_VGPU =
-      2,  //!< Device is associated with vGPU inside virtual machine.
+  2,  //!< Device is associated with vGPU inside virtual machine.
   NVML_GPU_VIRTUALIZATION_MODE_HOST_VGPU =
-      3,  //!< Device is associated with VGX hypervisor in vGPU mode
+  3,  //!< Device is associated with VGX hypervisor in vGPU mode
   NVML_GPU_VIRTUALIZATION_MODE_HOST_VSGA =
-      4,  //!< Device is associated with VGX hypervisor in vSGA mode
+  4,  //!< Device is associated with VGX hypervisor in vSGA mode
 } nvmlGpuVirtualizationMode_t;
 
 /**
@@ -916,9 +916,9 @@ typedef struct nvmlEventData_st {
 // vGPU GUEST info state.
 typedef enum nvmlVgpuGuestInfoState_enum {
   NVML_VGPU_INSTANCE_GUEST_INFO_STATE_UNINITIALIZED =
-      0,  //<! Guest-dependent fields uninitialized
+  0,  //<! Guest-dependent fields uninitialized
   NVML_VGPU_INSTANCE_GUEST_INFO_STATE_INITIALIZED =
-      1,  //<! Guest-dependent fields initialized
+  1,  //<! Guest-dependent fields initialized
 } nvmlVgpuGuestInfoState_t;
 
 /**
@@ -930,7 +930,7 @@ typedef struct nvmlVgpuMetadata_st {
   nvmlVgpuGuestInfoState_t
       guestInfoState;  //!< Current state of Guest-dependent fields
   char guestDriverVersion
-      [NVML_SYSTEM_DRIVER_VERSION_BUFFER_SIZE];  //!< Version of driver
+  [NVML_SYSTEM_DRIVER_VERSION_BUFFER_SIZE];  //!< Version of driver
   //!< installed in guest
   char hostDriverVersion[NVML_SYSTEM_DRIVER_VERSION_BUFFER_SIZE];  //!< Version
   //!< of driver
@@ -946,13 +946,13 @@ typedef struct nvmlVgpuMetadata_st {
 typedef enum nvmlVgpuVmCompatibility_enum {
   NVML_VGPU_VM_COMPATIBILITY_NONE = 0x0,  //!< vGPU is not runnable
   NVML_VGPU_VM_COMPATIBILITY_COLD =
-      0x1,  //!< vGPU is runnable from a cold / powered-off state (ACPI S5)
+  0x1,  //!< vGPU is runnable from a cold / powered-off state (ACPI S5)
   NVML_VGPU_VM_COMPATIBILITY_HIBERNATE =
-      0x2,  //!< vGPU is runnable from a hibernated state (ACPI S4)
+  0x2,  //!< vGPU is runnable from a hibernated state (ACPI S4)
   NVML_VGPU_VM_COMPATIBILITY_SLEEP =
-      0x4,  //!< vGPU is runnable from a sleeped state (ACPI S3)
+  0x4,  //!< vGPU is runnable from a sleeped state (ACPI S3)
   NVML_VGPU_VM_COMPATIBILITY_LIVE =
-      0x8,  //!< vGPU is runnable from a live/paused (ACPI S0)
+  0x8,  //!< vGPU is runnable from a live/paused (ACPI S0)
 } nvmlVgpuVmCompatibility_t;
 
 /**
@@ -961,13 +961,13 @@ typedef enum nvmlVgpuVmCompatibility_enum {
 typedef enum nvmlVgpuPgpuCompatibilityLimitCode_enum {
   NVML_VGPU_COMPATIBILITY_LIMIT_NONE = 0x0,  //!< Compatibility is not limited.
   NVML_VGPU_COMPATIBILITY_LIMIT_HOST_DRIVER =
-      0x1,  //!< Compatibility is limited by host driver version.
+  0x1,  //!< Compatibility is limited by host driver version.
   NVML_VGPU_COMPATIBILITY_LIMIT_GUEST_DRIVER =
-      0x2,  //!< Compatibility is limited by guest driver version.
+  0x2,  //!< Compatibility is limited by guest driver version.
   NVML_VGPU_COMPATIBILITY_LIMIT_GPU =
-      0x4,  //!< Compatibility is limited by GPU hardware.
+  0x4,  //!< Compatibility is limited by GPU hardware.
   NVML_VGPU_COMPATIBILITY_LIMIT_OTHER =
-      0x80000000,  //!< Compatibility is limited by an undefined factor.
+  0x80000000,  //!< Compatibility is limited by an undefined factor.
 } nvmlVgpuPgpuCompatibilityLimitCode_t;
 
 /**
@@ -1148,6 +1148,82 @@ typedef enum nvmlHostVgpuMode_enum {
   NVML_HOST_VGPU_MODE_NON_SRIOV = 0,  //!< Non SR-IOV mode
   NVML_HOST_VGPU_MODE_SRIOV = 1       //!< SR-IOV mode
 } nvmlHostVgpuMode_t;
+
+typedef struct nvmlGpuInstance_st *nvmlGpuInstance_t;
+
+typedef struct nvmlComputeInstanceInfo_st {
+  nvmlDevice_t device;           //!< Parent device
+  nvmlGpuInstance_t gpuInstance; //!< Parent GPU instance
+  unsigned int id;               //!< Unique instance ID within the GPU instance
+  unsigned int profileId;        //!< Unique profile ID within the GPU instance
+} nvmlComputeInstanceInfo_t;
+
+typedef struct nvmlComputeInstance_st *nvmlComputeInstance_t;
+
+typedef unsigned int nvmlDeviceArchitecture_t;
+
+typedef struct nvmlDeviceAttributes_st {
+  unsigned int multiprocessorCount;   //!< Streaming Multiprocessor count
+  unsigned int sharedCopyEngineCount; //!< Shared Copy Engine count
+  unsigned int sharedDecoderCount;    //!< Shared Decoder Engine count
+  unsigned int sharedEncoderCount;    //!< Shared Encoder Engine count
+  unsigned int sharedJpegCount;       //!< Shared JPEG Engine count
+  unsigned int sharedOfaCount;        //!< Shared OFA Engine count
+} nvmlDeviceAttributes_t;
+
+typedef unsigned int nvmlAffinityScope_t;
+
+typedef struct nvmlGpuInstancePlacement_st {
+  unsigned int start;
+  unsigned int size;
+} nvmlGpuInstancePlacement_t;
+
+typedef struct nvmlGpuInstanceProfileInfo_st {
+  unsigned int id;                  //!< Unique profile ID within the device
+  unsigned int isP2pSupported;      //!< Peer-to-Peer support
+  unsigned int sliceCount;          //!< GPU Slice count
+  unsigned int instanceCount;       //!< GPU instance count
+  unsigned int multiprocessorCount; //!< Streaming Multiprocessor count
+  unsigned int copyEngineCount;     //!< Copy Engine count
+  unsigned int decoderCount;        //!< Decoder Engine count
+  unsigned int encoderCount;        //!< Encoder Engine count
+  unsigned int jpegCount;           //!< JPEG Engine count
+  unsigned int ofaCount;            //!< OFA Engine count
+  unsigned long long memorySizeMB;  //!< Memory size in MBytes
+} nvmlGpuInstanceProfileInfo_t;
+
+typedef struct nvmlComputeInstanceProfileInfo_st {
+  unsigned int id;                    //!< Unique profile ID within the GPU instance
+  unsigned int sliceCount;            //!< GPU Slice count
+  unsigned int instanceCount;         //!< Compute instance count
+  unsigned int multiprocessorCount;   //!< Streaming Multiprocessor count
+  unsigned int sharedCopyEngineCount; //!< Shared Copy Engine count
+  unsigned int sharedDecoderCount;    //!< Shared Decoder Engine count
+  unsigned int sharedEncoderCount;    //!< Shared Encoder Engine count
+  unsigned int sharedJpegCount;       //!< Shared JPEG Engine count
+  unsigned int sharedOfaCount;        //!< Shared OFA Engine count
+} nvmlComputeInstanceProfileInfo_t;
+
+typedef struct nvmlGpuInstanceInfo_st {
+  nvmlDevice_t device;                  //!< Parent device
+  unsigned int id;                      //!< Unique instance ID within the device
+  unsigned int profileId;               //!< Unique profile ID within the device
+  nvmlGpuInstancePlacement_t placement; //!< Placement for this instance
+} nvmlGpuInstanceInfo_t;
+
+/**
+ * Possible values that classify the remap availability for each bank. The max
+ * field will contain the number of banks that have maximum remap availability
+ * (all reserved rows are available). None means that there are no reserved
+ * rows available.
+ */
+typedef struct nvmlRowRemapperHistogramValues_st {
+  unsigned int max;
+  unsigned int high;
+  unsigned int partial;
+  unsigned int low;
+  unsigned int none;
+} nvmlRowRemapperHistogramValues_t;
 
 #ifdef __cplusplus
 }

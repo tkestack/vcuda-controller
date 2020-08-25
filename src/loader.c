@@ -475,6 +475,23 @@ entry_t cuda_library_entry[] = {
     {.name = "cuMemRelease"},
     {.name = "cuMemSetAccess"},
     {.name = "cuMemUnmap"},
+    {.name = "cuCtxResetPersistingL2Cache"},
+    {.name = "cuDevicePrimaryCtxRelease_v2"},
+    {.name = "cuDevicePrimaryCtxReset_v2"},
+    {.name = "cuDevicePrimaryCtxSetFlags_v2"},
+    {.name = "cuFuncGetModule"},
+    {.name = "cuGraphInstantiate_v2"},
+    {.name = "cuGraphKernelNodeCopyAttributes"},
+    {.name = "cuGraphKernelNodeGetAttribute"},
+    {.name = "cuGraphKernelNodeSetAttribute"},
+    {.name = "cuMemRetainAllocationHandle"},
+    {.name = "cuOccupancyAvailableDynamicSMemPerBlock"},
+    {.name = "cuStreamCopyAttributes"},
+    {.name = "cuStreamCopyAttributes_ptsz"},
+    {.name = "cuStreamGetAttribute"},
+    {.name = "cuStreamGetAttribute_ptsz"},
+    {.name = "cuStreamSetAttribute"},
+    {.name = "cuStreamSetAttribute_ptsz"},
 };
 
 entry_t nvml_library_entry[] = {
@@ -684,6 +701,39 @@ entry_t nvml_library_entry[] = {
     {.name = "nvmlDeviceGetHostVgpuMode"},
     {.name = "nvmlDeviceGetPgpuMetadataString"},
     {.name = "nvmlVgpuInstanceGetEccMode"},
+    {.name = "nvmlComputeInstanceDestroy"},
+    {.name = "nvmlComputeInstanceGetInfo"},
+    {.name = "nvmlDeviceCreateGpuInstance"},
+    {.name = "nvmlDeviceGetArchitecture"},
+    {.name = "nvmlDeviceGetAttributes"},
+    {.name = "nvmlDeviceGetAttributes_v2"},
+    {.name = "nvmlDeviceGetComputeInstanceId"},
+    {.name = "nvmlDeviceGetCpuAffinityWithinScope"},
+    {.name = "nvmlDeviceGetDeviceHandleFromMigDeviceHandle"},
+    {.name = "nvmlDeviceGetGpuInstanceById"},
+    {.name = "nvmlDeviceGetGpuInstanceId"},
+    {.name = "nvmlDeviceGetGpuInstancePossiblePlacements"},
+    {.name = "nvmlDeviceGetGpuInstanceProfileInfo"},
+    {.name = "nvmlDeviceGetGpuInstanceRemainingCapacity"},
+    {.name = "nvmlDeviceGetGpuInstances"},
+    {.name = "nvmlDeviceGetMaxMigDeviceCount"},
+    {.name = "nvmlDeviceGetMemoryAffinity"},
+    {.name = "nvmlDeviceGetMigDeviceHandleByIndex"},
+    {.name = "nvmlDeviceGetMigMode"},
+    {.name = "nvmlDeviceGetRemappedRows"},
+    {.name = "nvmlDeviceGetRowRemapperHistogram"},
+    {.name = "nvmlDeviceIsMigDeviceHandle"},
+    {.name = "nvmlDeviceSetMigMode"},
+    {.name = "nvmlEventSetWait_v2"},
+    {.name = "nvmlGpuInstanceCreateComputeInstance"},
+    {.name = "nvmlGpuInstanceDestroy"},
+    {.name = "nvmlGpuInstanceGetComputeInstanceById"},
+    {.name = "nvmlGpuInstanceGetComputeInstanceProfileInfo"},
+    {.name = "nvmlGpuInstanceGetComputeInstanceRemainingCapacity"},
+    {.name = "nvmlGpuInstanceGetComputeInstances"},
+    {.name = "nvmlGpuInstanceGetInfo"},
+    {.name = "nvmlVgpuInstanceClearAccountingPids"},
+    {.name = "nvmlVgpuInstanceGetMdevUUID"},
 };
 
 static void UNUSED bug_on() {
@@ -890,7 +940,7 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
       LOGGER(4, "no - prefix");
       goto DONE;
     }
-    memmove(container_id, prune_pos+1, strlen(container_id));
+    memmove(container_id, prune_pos + 1, strlen(container_id));
 
     prune_pos = strstr(pod_uid, "-pod");
     if (!prune_pos) {
@@ -1031,7 +1081,7 @@ int read_controller_configuration() {
     goto DONE;
   }
 
-  rsize = (int)read(fd, (void *)&g_vcuda_config, sizeof(resource_data_t));
+  rsize = (int) read(fd, (void *) &g_vcuda_config, sizeof(resource_data_t));
   if (unlikely(rsize != sizeof(g_vcuda_config))) {
     LOGGER(4, "can't read %s, need %zu but got %d", CONTROLLER_CONFIG_PATH,
            sizeof(resource_data_t), rsize);

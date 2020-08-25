@@ -944,6 +944,40 @@ typedef enum {
   CUDA_ENTRY_ENUM(cuMemSetAccess),
   /** cuMemUnmap */
   CUDA_ENTRY_ENUM(cuMemUnmap),
+  /** cuCtxResetPersistingL2Cache */
+  CUDA_ENTRY_ENUM(cuCtxResetPersistingL2Cache),
+  /** cuDevicePrimaryCtxRelease_v2 */
+  CUDA_ENTRY_ENUM(cuDevicePrimaryCtxRelease_v2),
+  /** cuDevicePrimaryCtxReset_v2 */
+  CUDA_ENTRY_ENUM(cuDevicePrimaryCtxReset_v2),
+  /** cuDevicePrimaryCtxSetFlags_v2 */
+  CUDA_ENTRY_ENUM(cuDevicePrimaryCtxSetFlags_v2),
+  /** cuFuncGetModule */
+  CUDA_ENTRY_ENUM(cuFuncGetModule),
+  /** cuGraphInstantiate_v2 */
+  CUDA_ENTRY_ENUM(cuGraphInstantiate_v2),
+  /** cuGraphKernelNodeCopyAttributes */
+  CUDA_ENTRY_ENUM(cuGraphKernelNodeCopyAttributes),
+  /** cuGraphKernelNodeGetAttribute */
+  CUDA_ENTRY_ENUM(cuGraphKernelNodeGetAttribute),
+  /** cuGraphKernelNodeSetAttribute */
+  CUDA_ENTRY_ENUM(cuGraphKernelNodeSetAttribute),
+  /** cuMemRetainAllocationHandle */
+  CUDA_ENTRY_ENUM(cuMemRetainAllocationHandle),
+  /** cuOccupancyAvailableDynamicSMemPerBlock */
+  CUDA_ENTRY_ENUM(cuOccupancyAvailableDynamicSMemPerBlock),
+  /** cuStreamCopyAttributes */
+  CUDA_ENTRY_ENUM(cuStreamCopyAttributes),
+  /** cuStreamCopyAttributes_ptsz */
+  CUDA_ENTRY_ENUM(cuStreamCopyAttributes_ptsz),
+  /** cuStreamGetAttribute */
+  CUDA_ENTRY_ENUM(cuStreamGetAttribute),
+  /** cuStreamGetAttribute_ptsz */
+  CUDA_ENTRY_ENUM(cuStreamGetAttribute_ptsz),
+  /** cuStreamSetAttribute */
+  CUDA_ENTRY_ENUM(cuStreamSetAttribute),
+  /** cuStreamSetAttribute_ptsz */
+  CUDA_ENTRY_ENUM(cuStreamSetAttribute_ptsz),
 
   CUDA_ENTRY_END
 } cuda_entry_enum_t;

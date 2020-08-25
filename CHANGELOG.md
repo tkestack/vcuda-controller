@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Feat
+- add new functions of CUDA 11
+
 
 <a name="v1.0.1"></a>
 ## [v1.0.1] - 2020-05-21
