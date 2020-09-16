@@ -779,8 +779,8 @@ static void load_driver_libraries() {
   for (i = 0; i < NVML_ENTRY_END; i++) {
     nvml_library_entry[i].fn_ptr = dlsym(table, nvml_library_entry[i].name);
     if (unlikely(!nvml_library_entry[i].fn_ptr)) {
-      LOGGER(4, "can't find function %s in %s", driver_filename,
-             nvml_library_entry[i].name);
+      LOGGER(4, "can't find function %s in %s", nvml_library_entry[i].name,
+             driver_filename);
     }
   }
 
@@ -802,8 +802,8 @@ static void load_cuda_single_library(int idx) {
 
   cuda_library_entry[idx].fn_ptr = dlsym(table, cuda_library_entry[idx].name);
   if (unlikely(!cuda_library_entry[idx].fn_ptr)) {
-    LOGGER(4, "can't find function %s in %s", cuda_filename,
-           cuda_library_entry[idx].name);
+    LOGGER(4, "can't find function %s in %s", cuda_library_entry[idx].name,
+           cuda_filename);
   }
 
   dlclose(table);
@@ -829,8 +829,8 @@ void load_cuda_libraries() {
   for (i = 0; i < CUDA_ENTRY_END; i++) {
     cuda_library_entry[i].fn_ptr = dlsym(table, cuda_library_entry[i].name);
     if (unlikely(!cuda_library_entry[i].fn_ptr)) {
-      LOGGER(4, "can't find function %s in %s", cuda_filename,
-             cuda_library_entry[i].name);
+      LOGGER(4, "can't find function %s in %s", cuda_library_entry[i].name,
+             cuda_filename);
     }
   }
 
