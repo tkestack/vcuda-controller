@@ -492,6 +492,55 @@ entry_t cuda_library_entry[] = {
     {.name = "cuStreamGetAttribute_ptsz"},
     {.name = "cuStreamSetAttribute"},
     {.name = "cuStreamSetAttribute_ptsz"},
+    {.name = "cuArrayGetPlane"},
+    {.name = "cuArrayGetSparseProperties"},
+    {.name = "cuDeviceGetDefaultMemPool"},
+    {.name = "cuDeviceGetLuid"},
+    {.name = "cuDeviceGetMemPool"},
+    {.name = "cuDeviceGetTexture1DLinearMaxWidth"},
+    {.name = "cuDeviceSetMemPool"},
+    {.name = "cuEventRecordWithFlags"},
+    {.name = "cuEventRecordWithFlags_ptsz"},
+    {.name = "cuGraphAddEventRecordNode"},
+    {.name = "cuGraphAddEventWaitNode"},
+    {.name = "cuGraphAddExternalSemaphoresSignalNode"},
+    {.name = "cuGraphAddExternalSemaphoresWaitNode"},
+    {.name = "cuGraphEventRecordNodeGetEvent"},
+    {.name = "cuGraphEventRecordNodeSetEvent"},
+    {.name = "cuGraphEventWaitNodeGetEvent"},
+    {.name = "cuGraphEventWaitNodeSetEvent"},
+    {.name = "cuGraphExecChildGraphNodeSetParams"},
+    {.name = "cuGraphExecEventRecordNodeSetEvent"},
+    {.name = "cuGraphExecEventWaitNodeSetEvent"},
+    {.name = "cuGraphExecExternalSemaphoresSignalNodeSetParams"},
+    {.name = "cuGraphExecExternalSemaphoresWaitNodeSetParams"},
+    {.name = "cuGraphExternalSemaphoresSignalNodeGetParams"},
+    {.name = "cuGraphExternalSemaphoresSignalNodeSetParams"},
+    {.name = "cuGraphExternalSemaphoresWaitNodeGetParams"},
+    {.name = "cuGraphExternalSemaphoresWaitNodeSetParams"},
+    {.name = "cuGraphUpload"},
+    {.name = "cuGraphUpload_ptsz"},
+    {.name = "cuIpcOpenMemHandle_v2"},
+    {.name = "cuMemAllocAsync"},
+    {.name = "cuMemAllocAsync_ptsz"},
+    {.name = "cuMemAllocFromPoolAsync"},
+    {.name = "cuMemAllocFromPoolAsync_ptsz"},
+    {.name = "cuMemFreeAsync"},
+    {.name = "cuMemFreeAsync_ptsz"},
+    {.name = "cuMemMapArrayAsync"},
+    {.name = "cuMemMapArrayAsync_ptsz"},
+    {.name = "cuMemPoolCreate"},
+    {.name = "cuMemPoolDestroy"},
+    {.name = "cuMemPoolExportPointer"},
+    {.name = "cuMemPoolExportToShareableHandle"},
+    {.name = "cuMemPoolGetAccess"},
+    {.name = "cuMemPoolGetAttribute"},
+    {.name = "cuMemPoolImportFromShareableHandle"},
+    {.name = "cuMemPoolImportPointer"},
+    {.name = "cuMemPoolSetAccess"},
+    {.name = "cuMemPoolSetAttribute"},
+    {.name = "cuMemPoolTrimTo"},
+    {.name = "cuMipmappedArrayGetSparseProperties"},
 };
 
 entry_t nvml_library_entry[] = {
@@ -734,6 +783,13 @@ entry_t nvml_library_entry[] = {
     {.name = "nvmlGpuInstanceGetInfo"},
     {.name = "nvmlVgpuInstanceClearAccountingPids"},
     {.name = "nvmlVgpuInstanceGetMdevUUID"},
+    {.name = "nvmlComputeInstanceGetInfo_v2"},
+    {.name = "nvmlDeviceGetComputeRunningProcesses_v2"},
+    {.name = "nvmlDeviceGetGraphicsRunningProcesses_v2"},
+    {.name = "nvmlDeviceSetTemperatureThreshold"},
+    {.name = "nvmlRetry_NvRmControl"},
+    {.name = "nvmlVgpuInstanceGetGpuInstanceId"},
+    {.name = "nvmlVgpuTypeGetGpuInstanceProfileId"},
 };
 
 static void UNUSED bug_on() {
@@ -1027,17 +1083,17 @@ static void matchRegex(const char *pattern, const char *matchString,
 
   reti = regexec(&regex, matchString, 1, matches, 0);
   switch (reti) {
-    case 0:
-      strncpy(version, matchString + matches[0].rm_so,
-              matches[0].rm_eo - matches[0].rm_so);
-      version[matches[0].rm_eo - matches[0].rm_so] = '\0';
-      break;
-    case REG_NOMATCH:
-      LOGGER(4, "Regex does not match for string: %s", matchString);
-      break;
-    default:
-      regerror(reti, &regex, msgbuf, sizeof(msgbuf));
-      LOGGER(4, "Regex match failed: %s", msgbuf);
+  case 0:
+    strncpy(version, matchString + matches[0].rm_so,
+            matches[0].rm_eo - matches[0].rm_so);
+    version[matches[0].rm_eo - matches[0].rm_so] = '\0';
+    break;
+  case REG_NOMATCH:
+    LOGGER(4, "Regex does not match for string: %s", matchString);
+    break;
+  default:
+    regerror(reti, &regex, msgbuf, sizeof(msgbuf));
+    LOGGER(4, "Regex match failed: %s", msgbuf);
   }
 
   regfree(&regex);
@@ -1081,7 +1137,7 @@ int read_controller_configuration() {
     goto DONE;
   }
 
-  rsize = (int) read(fd, (void *) &g_vcuda_config, sizeof(resource_data_t));
+  rsize = (int)read(fd, (void *)&g_vcuda_config, sizeof(resource_data_t));
   if (unlikely(rsize != sizeof(g_vcuda_config))) {
     LOGGER(4, "can't read %s, need %zu but got %d", CONTROLLER_CONFIG_PATH,
            sizeof(resource_data_t), rsize);

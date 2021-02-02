@@ -508,7 +508,7 @@ typedef enum cudaError_enum {
  */
 typedef enum CUdevice_attribute_enum {
   CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK =
-  1, /**< Maximum number of threads per block */
+      1, /**< Maximum number of threads per block */
   CU_DEVICE_ATTRIBUTE_MAX_BLOCK_DIM_X = 2, /**< Maximum block dimension X */
   CU_DEVICE_ATTRIBUTE_MAX_BLOCK_DIM_Y = 3, /**< Maximum block dimension Y */
   CU_DEVICE_ATTRIBUTE_MAX_BLOCK_DIM_Z = 4, /**< Maximum block dimension Z */
@@ -516,204 +516,204 @@ typedef enum CUdevice_attribute_enum {
   CU_DEVICE_ATTRIBUTE_MAX_GRID_DIM_Y = 6,  /**< Maximum grid dimension Y */
   CU_DEVICE_ATTRIBUTE_MAX_GRID_DIM_Z = 7,  /**< Maximum grid dimension Z */
   CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK =
-  8, /**< Maximum shared memory available per block in bytes */
+      8, /**< Maximum shared memory available per block in bytes */
   CU_DEVICE_ATTRIBUTE_SHARED_MEMORY_PER_BLOCK =
-  8, /**< Deprecated, use CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK */
+      8, /**< Deprecated, use CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK */
   CU_DEVICE_ATTRIBUTE_TOTAL_CONSTANT_MEMORY =
-  9, /**< Memory available on device for __constant__ variables in a CUDA C
-                kernel in bytes */
+      9, /**< Memory available on device for __constant__ variables in a CUDA C
+                    kernel in bytes */
   CU_DEVICE_ATTRIBUTE_WARP_SIZE = 10, /**< Warp size in threads */
   CU_DEVICE_ATTRIBUTE_MAX_PITCH =
-  11, /**< Maximum pitch in bytes allowed by memory copies */
+      11, /**< Maximum pitch in bytes allowed by memory copies */
   CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_BLOCK =
-  12, /**< Maximum number of 32-bit registers available per block */
+      12, /**< Maximum number of 32-bit registers available per block */
   CU_DEVICE_ATTRIBUTE_REGISTERS_PER_BLOCK =
-  12, /**< Deprecated, use CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_BLOCK */
+      12, /**< Deprecated, use CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_BLOCK */
   CU_DEVICE_ATTRIBUTE_CLOCK_RATE =
-  13, /**< Typical clock frequency in kilohertz */
+      13, /**< Typical clock frequency in kilohertz */
   CU_DEVICE_ATTRIBUTE_TEXTURE_ALIGNMENT =
-  14, /**< Alignment requirement for textures */
+      14, /**< Alignment requirement for textures */
   CU_DEVICE_ATTRIBUTE_GPU_OVERLAP =
-  15, /**< Device can possibly copy memory and execute a kernel
-                 concurrently. Deprecated. Use instead
-                 CU_DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT. */
+      15, /**< Device can possibly copy memory and execute a kernel
+                     concurrently. Deprecated. Use instead
+                     CU_DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT. */
   CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT =
-  16, /**< Number of multiprocessors on device */
+      16, /**< Number of multiprocessors on device */
   CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT =
-  17, /**< Specifies whether there is a run time limit on kernels */
+      17, /**< Specifies whether there is a run time limit on kernels */
   CU_DEVICE_ATTRIBUTE_INTEGRATED =
-  18, /**< Device is integrated with host memory */
+      18, /**< Device is integrated with host memory */
   CU_DEVICE_ATTRIBUTE_CAN_MAP_HOST_MEMORY =
-  19, /**< Device can map host memory into CUDA address space */
+      19, /**< Device can map host memory into CUDA address space */
   CU_DEVICE_ATTRIBUTE_COMPUTE_MODE =
-  20, /**< Compute mode (See ::CUcomputemode for details) */
+      20, /**< Compute mode (See ::CUcomputemode for details) */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_WIDTH =
-  21, /**< Maximum 1D texture width */
+      21, /**< Maximum 1D texture width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_WIDTH =
-  22, /**< Maximum 2D texture width */
+      22, /**< Maximum 2D texture width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_HEIGHT =
-  23, /**< Maximum 2D texture height */
+      23, /**< Maximum 2D texture height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_WIDTH =
-  24, /**< Maximum 3D texture width */
+      24, /**< Maximum 3D texture width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_HEIGHT =
-  25, /**< Maximum 3D texture height */
+      25, /**< Maximum 3D texture height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH =
-  26, /**< Maximum 3D texture depth */
+      26, /**< Maximum 3D texture depth */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH =
-  27, /**< Maximum 2D layered texture width */
+      27, /**< Maximum 2D layered texture width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_HEIGHT =
-  28, /**< Maximum 2D layered texture height */
+      28, /**< Maximum 2D layered texture height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS =
-  29, /**< Maximum layers in a 2D layered texture */
+      29, /**< Maximum layers in a 2D layered texture */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_WIDTH =
-  27, /**< Deprecated, use
-                 CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH */
+      27, /**< Deprecated, use
+                     CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_HEIGHT =
-  28, /**< Deprecated, use
-                 CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_HEIGHT */
+      28, /**< Deprecated, use
+                     CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_HEIGHT */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_NUMSLICES =
-  29, /**< Deprecated, use
-                 CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS */
+      29, /**< Deprecated, use
+                     CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS */
   CU_DEVICE_ATTRIBUTE_SURFACE_ALIGNMENT =
-  30, /**< Alignment requirement for surfaces */
+      30, /**< Alignment requirement for surfaces */
   CU_DEVICE_ATTRIBUTE_CONCURRENT_KERNELS =
-  31, /**< Device can possibly execute multiple kernels concurrently */
+      31, /**< Device can possibly execute multiple kernels concurrently */
   CU_DEVICE_ATTRIBUTE_ECC_ENABLED = 32,   /**< Device has ECC support enabled */
   CU_DEVICE_ATTRIBUTE_PCI_BUS_ID = 33,    /**< PCI bus ID of the device */
   CU_DEVICE_ATTRIBUTE_PCI_DEVICE_ID = 34, /**< PCI device ID of the device */
   CU_DEVICE_ATTRIBUTE_TCC_DRIVER = 35, /**< Device is using TCC driver model */
   CU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE =
-  36, /**< Peak memory clock frequency in kilohertz */
+      36, /**< Peak memory clock frequency in kilohertz */
   CU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH =
-  37, /**< Global memory bus width in bits */
+      37, /**< Global memory bus width in bits */
   CU_DEVICE_ATTRIBUTE_L2_CACHE_SIZE = 38, /**< Size of L2 cache in bytes */
   CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR =
-  39, /**< Maximum resident threads per multiprocessor */
+      39, /**< Maximum resident threads per multiprocessor */
   CU_DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT =
-  40, /**< Number of asynchronous engines */
+      40, /**< Number of asynchronous engines */
   CU_DEVICE_ATTRIBUTE_UNIFIED_ADDRESSING =
-  41, /**< Device shares a unified address space with the host */
+      41, /**< Device shares a unified address space with the host */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_WIDTH =
-  42, /**< Maximum 1D layered texture width */
+      42, /**< Maximum 1D layered texture width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_LAYERS =
-  43, /**< Maximum layers in a 1D layered texture */
+      43, /**< Maximum layers in a 1D layered texture */
   CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER = 44, /**< Deprecated, do not use. */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_WIDTH =
-  45, /**< Maximum 2D texture width if CUDA_ARRAY3D_TEXTURE_GATHER is set */
+      45, /**< Maximum 2D texture width if CUDA_ARRAY3D_TEXTURE_GATHER is set */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_HEIGHT =
-  46, /**< Maximum 2D texture height if CUDA_ARRAY3D_TEXTURE_GATHER is set
+      46, /**< Maximum 2D texture height if CUDA_ARRAY3D_TEXTURE_GATHER is set
            */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_WIDTH_ALTERNATE =
-  47, /**< Alternate maximum 3D texture width */
+      47, /**< Alternate maximum 3D texture width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_HEIGHT_ALTERNATE =
-  48, /**< Alternate maximum 3D texture height */
+      48, /**< Alternate maximum 3D texture height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH_ALTERNATE =
-  49, /**< Alternate maximum 3D texture depth */
+      49, /**< Alternate maximum 3D texture depth */
   CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID = 50, /**< PCI domain ID of the device */
   CU_DEVICE_ATTRIBUTE_TEXTURE_PITCH_ALIGNMENT =
-  51, /**< Pitch alignment requirement for textures */
+      51, /**< Pitch alignment requirement for textures */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_WIDTH =
-  52, /**< Maximum cubemap texture width/height */
+      52, /**< Maximum cubemap texture width/height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_WIDTH =
-  53, /**< Maximum cubemap layered texture width/height */
+      53, /**< Maximum cubemap layered texture width/height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_LAYERS =
-  54, /**< Maximum layers in a cubemap layered texture */
+      54, /**< Maximum layers in a cubemap layered texture */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_WIDTH =
-  55, /**< Maximum 1D surface width */
+      55, /**< Maximum 1D surface width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_WIDTH =
-  56, /**< Maximum 2D surface width */
+      56, /**< Maximum 2D surface width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_HEIGHT =
-  57, /**< Maximum 2D surface height */
+      57, /**< Maximum 2D surface height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_WIDTH =
-  58, /**< Maximum 3D surface width */
+      58, /**< Maximum 3D surface width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_HEIGHT =
-  59, /**< Maximum 3D surface height */
+      59, /**< Maximum 3D surface height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_DEPTH =
-  60, /**< Maximum 3D surface depth */
+      60, /**< Maximum 3D surface depth */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_WIDTH =
-  61, /**< Maximum 1D layered surface width */
+      61, /**< Maximum 1D layered surface width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_LAYERS =
-  62, /**< Maximum layers in a 1D layered surface */
+      62, /**< Maximum layers in a 1D layered surface */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_WIDTH =
-  63, /**< Maximum 2D layered surface width */
+      63, /**< Maximum 2D layered surface width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_HEIGHT =
-  64, /**< Maximum 2D layered surface height */
+      64, /**< Maximum 2D layered surface height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_LAYERS =
-  65, /**< Maximum layers in a 2D layered surface */
+      65, /**< Maximum layers in a 2D layered surface */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_WIDTH =
-  66, /**< Maximum cubemap surface width */
+      66, /**< Maximum cubemap surface width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_WIDTH =
-  67, /**< Maximum cubemap layered surface width */
+      67, /**< Maximum cubemap layered surface width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_LAYERS =
-  68, /**< Maximum layers in a cubemap layered surface */
+      68, /**< Maximum layers in a cubemap layered surface */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LINEAR_WIDTH =
-  69, /**< Maximum 1D linear texture width */
+      69, /**< Maximum 1D linear texture width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_WIDTH =
-  70, /**< Maximum 2D linear texture width */
+      70, /**< Maximum 2D linear texture width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_HEIGHT =
-  71, /**< Maximum 2D linear texture height */
+      71, /**< Maximum 2D linear texture height */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_PITCH =
-  72, /**< Maximum 2D linear texture pitch in bytes */
+      72, /**< Maximum 2D linear texture pitch in bytes */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_WIDTH =
-  73, /**< Maximum mipmapped 2D texture width */
+      73, /**< Maximum mipmapped 2D texture width */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_HEIGHT =
-  74, /**< Maximum mipmapped 2D texture height */
+      74, /**< Maximum mipmapped 2D texture height */
   CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MAJOR =
-  75, /**< Major compute capability version number */
+      75, /**< Major compute capability version number */
   CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MINOR =
-  76, /**< Minor compute capability version number */
+      76, /**< Minor compute capability version number */
   CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_MIPMAPPED_WIDTH =
-  77, /**< Maximum mipmapped 1D texture width */
+      77, /**< Maximum mipmapped 1D texture width */
   CU_DEVICE_ATTRIBUTE_STREAM_PRIORITIES_SUPPORTED =
-  78, /**< Device supports stream priorities */
+      78, /**< Device supports stream priorities */
   CU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED =
-  79, /**< Device supports caching globals in L1 */
+      79, /**< Device supports caching globals in L1 */
   CU_DEVICE_ATTRIBUTE_LOCAL_L1_CACHE_SUPPORTED =
-  80, /**< Device supports caching locals in L1 */
+      80, /**< Device supports caching locals in L1 */
   CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_MULTIPROCESSOR =
-  81, /**< Maximum shared memory available per multiprocessor in bytes */
+      81, /**< Maximum shared memory available per multiprocessor in bytes */
   CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_MULTIPROCESSOR =
-  82, /**< Maximum number of 32-bit registers available per multiprocessor
+      82, /**< Maximum number of 32-bit registers available per multiprocessor
            */
   CU_DEVICE_ATTRIBUTE_MANAGED_MEMORY =
-  83, /**< Device can allocate managed memory on this system */
+      83, /**< Device can allocate managed memory on this system */
   CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD =
-  84, /**< Device is on a multi-GPU board */
+      84, /**< Device is on a multi-GPU board */
   CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID =
-  85, /**< Unique id for a group of devices on the same multi-GPU board */
+      85, /**< Unique id for a group of devices on the same multi-GPU board */
   CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED =
-  86, /**< Link between the device and the host supports native atomic
-                 operations (this is a placeholder attribute, and is not
-             supported on any current hardware)*/
+      86, /**< Link between the device and the host supports native atomic
+                     operations (this is a placeholder attribute, and is not
+                 supported on any current hardware)*/
   CU_DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO =
-  87, /**< Ratio of single precision performance (in floating-point
-                 operations per second) to double precision performance */
+      87, /**< Ratio of single precision performance (in floating-point
+                     operations per second) to double precision performance */
   CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS =
-  88, /**< Device supports coherently accessing pageable memory without
-                 calling cudaHostRegister on it */
+      88, /**< Device supports coherently accessing pageable memory without
+                     calling cudaHostRegister on it */
   CU_DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS =
-  89, /**< Device can coherently access managed memory concurrently with the
-                 CPU */
+      89, /**< Device can coherently access managed memory concurrently with the
+                     CPU */
   CU_DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED =
-  90, /**< Device supports compute preemption. */
+      90, /**< Device supports compute preemption. */
   CU_DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM =
-  91, /**< Device can access host registered memory at the same virtual
-                 address as the CPU */
+      91, /**< Device can access host registered memory at the same virtual
+                     address as the CPU */
   CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_MEM_OPS =
-  92, /**< ::cuStreamBatchMemOp and related APIs are supported. */
+      92, /**< ::cuStreamBatchMemOp and related APIs are supported. */
   CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS =
-  93, /**< 64-bit operations are supported in ::cuStreamBatchMemOp and
-                 related APIs. */
+      93, /**< 64-bit operations are supported in ::cuStreamBatchMemOp and
+                     related APIs. */
   CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR =
-  94, /**< ::CU_STREAM_WAIT_VALUE_NOR is supported. */
+      94, /**< ::CU_STREAM_WAIT_VALUE_NOR is supported. */
   CU_DEVICE_ATTRIBUTE_COOPERATIVE_LAUNCH = 95, /**< Device supports launching
                                                   cooperative kernels via
                                                   ::cuLaunchCooperativeKernel */
   CU_DEVICE_ATTRIBUTE_COOPERATIVE_MULTI_DEVICE_LAUNCH =
-  96, /**< Device can participate in cooperative kernels launched via
-                 ::cuLaunchCooperativeKernelMultiDevice */
+      96, /**< Device can participate in cooperative kernels launched via
+                     ::cuLaunchCooperativeKernelMultiDevice */
   CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK_OPTIN =
-  97, /**< Maximum optin shared memory per block */
+      97, /**< Maximum optin shared memory per block */
   CU_DEVICE_ATTRIBUTE_MAX
 } CUdevice_attribute;
 
@@ -722,11 +722,11 @@ typedef enum CUdevice_attribute_enum {
  */
 typedef enum CUdevice_P2PAttribute_enum {
   CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK =
-  0x01, /**< A relative value indicating the performance of the link between
-                           two devices */
+      0x01, /**< A relative value indicating the performance of the link between
+                               two devices */
   CU_DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED = 0x02, /**< P2P Access is enable */
   CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED =
-  0x03 /**< Atomic operation over the link supported */
+      0x03 /**< Atomic operation over the link supported */
 } CUdevice_P2PAttribute;
 
 /**
@@ -737,9 +737,9 @@ typedef enum CUlimit_enum {
   CU_LIMIT_PRINTF_FIFO_SIZE = 0x01, /**< GPU printf FIFO size */
   CU_LIMIT_MALLOC_HEAP_SIZE = 0x02, /**< GPU malloc heap size */
   CU_LIMIT_DEV_RUNTIME_SYNC_DEPTH =
-  0x03, /**< GPU device runtime launch synchronize depth */
+      0x03, /**< GPU device runtime launch synchronize depth */
   CU_LIMIT_DEV_RUNTIME_PENDING_LAUNCH_COUNT =
-  0x04, /**< GPU device runtime pending launch count */
+      0x04, /**< GPU device runtime pending launch count */
   CU_LIMIT_MAX
 } CUlimit;
 
@@ -748,13 +748,13 @@ typedef enum CUlimit_enum {
  */
 typedef enum CUfunc_cache_enum {
   CU_FUNC_CACHE_PREFER_NONE =
-  0x00, /**< no preference for shared memory or L1 (default) */
+      0x00, /**< no preference for shared memory or L1 (default) */
   CU_FUNC_CACHE_PREFER_SHARED =
-  0x01, /**< prefer larger shared memory and smaller L1 cache */
+      0x01, /**< prefer larger shared memory and smaller L1 cache */
   CU_FUNC_CACHE_PREFER_L1 =
-  0x02, /**< prefer larger L1 cache and smaller shared memory */
+      0x02, /**< prefer larger L1 cache and smaller shared memory */
   CU_FUNC_CACHE_PREFER_EQUAL =
-  0x03 /**< prefer equal sized L1 cache and shared memory */
+      0x03 /**< prefer equal sized L1 cache and shared memory */
 } CUfunc_cache;
 
 /**
@@ -762,11 +762,11 @@ typedef enum CUfunc_cache_enum {
  */
 typedef enum CUsharedconfig_enum {
   CU_SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE =
-  0x00, /**< set default shared memory bank size */
+      0x00, /**< set default shared memory bank size */
   CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE =
-  0x01, /**< set shared memory bank width to four bytes */
+      0x01, /**< set shared memory bank width to four bytes */
   CU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE =
-  0x02 /**< set shared memory bank width to eight bytes */
+      0x02 /**< set shared memory bank width to eight bytes */
 } CUsharedconfig;
 
 /**
@@ -955,12 +955,12 @@ typedef enum CUjitInputType_enum {
  */
 typedef enum CUpointer_attribute_enum {
   CU_POINTER_ATTRIBUTE_CONTEXT =
-  1, /**< The ::CUcontext on which a pointer was allocated or registered */
+      1, /**< The ::CUcontext on which a pointer was allocated or registered */
   CU_POINTER_ATTRIBUTE_MEMORY_TYPE = 2, /**< The ::CUmemorytype describing the
                                            physical location of a pointer */
   CU_POINTER_ATTRIBUTE_DEVICE_POINTER =
-  3, /**< The address at which a pointer's memory may be accessed on the
-                        device */
+      3, /**< The address at which a pointer's memory may be accessed on the
+                            device */
   CU_POINTER_ATTRIBUTE_HOST_POINTER = 4, /**< The address at which a pointer's
                                             memory may be accessed on the host
                                             */
@@ -970,9 +970,9 @@ typedef enum CUpointer_attribute_enum {
                                             memory operation initiated on this
                                             region */
   CU_POINTER_ATTRIBUTE_BUFFER_ID =
-  7, /**< A process-wide unique ID for an allocated memory region*/
+      7, /**< A process-wide unique ID for an allocated memory region*/
   CU_POINTER_ATTRIBUTE_IS_MANAGED =
-  8 /**< Indicates if the pointer points to managed memory */
+      8 /**< Indicates if the pointer points to managed memory */
 } CUpointer_attribute;
 
 /**
@@ -1269,7 +1269,7 @@ typedef struct CUDA_TEXTURE_DESC_st {
  */
 typedef enum CUresourceViewFormat_enum {
   CU_RES_VIEW_FORMAT_NONE =
-  0x00, /**< No resource view format (use underlying resource format) */
+      0x00, /**< No resource view format (use underlying resource format) */
   CU_RES_VIEW_FORMAT_UINT_1X8 = 0x01, /**< 1 channel unsigned 8-bit integers */
   CU_RES_VIEW_FORMAT_UINT_2X8 = 0x02, /**< 2 channel unsigned 8-bit integers */
   CU_RES_VIEW_FORMAT_UINT_4X8 = 0x03, /**< 4 channel unsigned 8-bit integers */
@@ -1277,20 +1277,20 @@ typedef enum CUresourceViewFormat_enum {
   CU_RES_VIEW_FORMAT_SINT_2X8 = 0x05, /**< 2 channel signed 8-bit integers */
   CU_RES_VIEW_FORMAT_SINT_4X8 = 0x06, /**< 4 channel signed 8-bit integers */
   CU_RES_VIEW_FORMAT_UINT_1X16 =
-  0x07, /**< 1 channel unsigned 16-bit integers */
+      0x07, /**< 1 channel unsigned 16-bit integers */
   CU_RES_VIEW_FORMAT_UINT_2X16 =
-  0x08, /**< 2 channel unsigned 16-bit integers */
+      0x08, /**< 2 channel unsigned 16-bit integers */
   CU_RES_VIEW_FORMAT_UINT_4X16 =
-  0x09, /**< 4 channel unsigned 16-bit integers */
+      0x09, /**< 4 channel unsigned 16-bit integers */
   CU_RES_VIEW_FORMAT_SINT_1X16 = 0x0a, /**< 1 channel signed 16-bit integers */
   CU_RES_VIEW_FORMAT_SINT_2X16 = 0x0b, /**< 2 channel signed 16-bit integers */
   CU_RES_VIEW_FORMAT_SINT_4X16 = 0x0c, /**< 4 channel signed 16-bit integers */
   CU_RES_VIEW_FORMAT_UINT_1X32 =
-  0x0d, /**< 1 channel unsigned 32-bit integers */
+      0x0d, /**< 1 channel unsigned 32-bit integers */
   CU_RES_VIEW_FORMAT_UINT_2X32 =
-  0x0e, /**< 2 channel unsigned 32-bit integers */
+      0x0e, /**< 2 channel unsigned 32-bit integers */
   CU_RES_VIEW_FORMAT_UINT_4X32 =
-  0x0f, /**< 4 channel unsigned 32-bit integers */
+      0x0f, /**< 4 channel unsigned 32-bit integers */
   CU_RES_VIEW_FORMAT_SINT_1X32 = 0x10,  /**< 1 channel signed 32-bit integers */
   CU_RES_VIEW_FORMAT_SINT_2X32 = 0x11,  /**< 2 channel signed 32-bit integers */
   CU_RES_VIEW_FORMAT_SINT_4X32 = 0x12,  /**< 4 channel signed 32-bit integers */
@@ -1308,9 +1308,9 @@ typedef enum CUresourceViewFormat_enum {
   CU_RES_VIEW_FORMAT_UNSIGNED_BC5 = 0x1e, /**< Block compressed 5 unsigned */
   CU_RES_VIEW_FORMAT_SIGNED_BC5 = 0x1f,   /**< Block compressed 5 signed */
   CU_RES_VIEW_FORMAT_UNSIGNED_BC6H =
-  0x20, /**< Block compressed 6 unsigned half-float */
+      0x20, /**< Block compressed 6 unsigned half-float */
   CU_RES_VIEW_FORMAT_SIGNED_BC6H =
-  0x21, /**< Block compressed 6 signed half-float */
+      0x21, /**< Block compressed 6 signed half-float */
   CU_RES_VIEW_FORMAT_UNSIGNED_BC7 = 0x22 /**< Block compressed 7 */
 } CUresourceViewFormat;
 
@@ -1334,12 +1334,12 @@ typedef struct CUDA_RESOURCE_VIEW_DESC_st {
  */
 typedef enum CUstreamBatchMemOpType_enum {
   CU_STREAM_MEM_OP_WAIT_VALUE_32 =
-  1, /**< Represents a ::cuStreamWaitValue32 operation */
+      1, /**< Represents a ::cuStreamWaitValue32 operation */
   CU_STREAM_MEM_OP_WRITE_VALUE_32 =
-  2, /**< Represents a ::cuStreamWriteValue32 operation */
+      2, /**< Represents a ::cuStreamWriteValue32 operation */
   CU_STREAM_MEM_OP_FLUSH_REMOTE_WRITES =
-  3 /**< This has the same effect as ::CU_STREAM_WAIT_VALUE_FLUSH, but as a
-                           standalone operation. */
+      3 /**< This has the same effect as ::CU_STREAM_WAIT_VALUE_FLUSH, but as a
+                               standalone operation. */
 } CUstreamBatchMemOpType;
 
 /**
@@ -1405,11 +1405,11 @@ typedef enum CUGLDeviceList_enum {
   CU_GL_DEVICE_LIST_ALL = 0x01, /**< The CUDA devices for all GPUs used by the
                                    current OpenGL context */
   CU_GL_DEVICE_LIST_CURRENT_FRAME =
-  0x02, /**< The CUDA devices for the GPUs used by the current OpenGL
-                           context in its currently rendering frame */
+      0x02, /**< The CUDA devices for the GPUs used by the current OpenGL
+                               context in its currently rendering frame */
   CU_GL_DEVICE_LIST_NEXT_FRAME =
-  0x03, /**< The CUDA devices for the GPUs to be used by the current OpenGL
-                           context in the next frame */
+      0x03, /**< The CUDA devices for the GPUs to be used by the current OpenGL
+                               context in the next frame */
 } CUGLDeviceList;
 
 /**
@@ -1426,16 +1426,16 @@ typedef enum CUoutput_mode_enum {
  */
 typedef enum CUmem_advise_enum {
   CU_MEM_ADVISE_SET_READ_MOSTLY =
-  1, /**< Data will mostly be read and only occassionally be written to */
+      1, /**< Data will mostly be read and only occassionally be written to */
   CU_MEM_ADVISE_UNSET_READ_MOSTLY =
-  2, /**< Undo the effect of ::CU_MEM_ADVISE_SET_READ_MOSTLY */
+      2, /**< Undo the effect of ::CU_MEM_ADVISE_SET_READ_MOSTLY */
   CU_MEM_ADVISE_SET_PREFERRED_LOCATION =
-  3, /**< Set the preferred location for the data as the specified device */
+      3, /**< Set the preferred location for the data as the specified device */
   CU_MEM_ADVISE_UNSET_PREFERRED_LOCATION =
-  4, /**< Clear the preferred location for the data */
+      4, /**< Clear the preferred location for the data */
   CU_MEM_ADVISE_SET_ACCESSED_BY =
-  5, /**< Data will be accessed by the specified device, so prevent page
-                        faults as much as possible */
+      5, /**< Data will be accessed by the specified device, so prevent page
+                            faults as much as possible */
   CU_MEM_ADVISE_UNSET_ACCESSED_BY = 6 /**< Let the Unified Memory subsystem
                                          decide on the page faulting policy for
                                          the specified device */
@@ -1443,15 +1443,15 @@ typedef enum CUmem_advise_enum {
 
 typedef enum CUmem_range_attribute_enum {
   CU_MEM_RANGE_ATTRIBUTE_READ_MOSTLY =
-  1, /**< Whether the range will mostly be read and only occassionally be
-                        written to */
+      1, /**< Whether the range will mostly be read and only occassionally be
+                            written to */
   CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION =
-  2, /**< The preferred location of the range */
+      2, /**< The preferred location of the range */
   CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY = 3, /**< Memory range has
                                              ::CU_MEM_ADVISE_SET_ACCESSED_BY set
                                              for specified device */
   CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION =
-  4 /**< The last location to which the range was prefetched */
+      4 /**< The last location to which the range was prefetched */
 } CUmem_range_attribute;
 
 typedef const struct CUDBGAPI_st *CUDBGAPI;
@@ -1460,22 +1460,22 @@ typedef enum {
   CUDBG_SUCCESS = 0x0000,       /* Successful execution */
   CUDBG_ERROR_UNKNOWN = 0x0001, /* Error type not listed below */
   CUDBG_ERROR_BUFFER_TOO_SMALL =
-  0x0002, /* Cannot copy all the queried data into the buffer argument */
+      0x0002, /* Cannot copy all the queried data into the buffer argument */
   CUDBG_ERROR_UNKNOWN_FUNCTION =
-  0x0003, /* Function cannot be found in the CUDA kernel */
+      0x0003, /* Function cannot be found in the CUDA kernel */
   CUDBG_ERROR_INVALID_ARGS =
-  0x0004, /* Wrong use of arguments (NULL pointer, illegal value,...) */
+      0x0004, /* Wrong use of arguments (NULL pointer, illegal value,...) */
   CUDBG_ERROR_UNINITIALIZED =
-  0x0005, /* Debugger API has not yet been properly initialized */
+      0x0005, /* Debugger API has not yet been properly initialized */
   CUDBG_ERROR_INVALID_COORDINATES =
-  0x0006, /* Invalid block or thread coordinates were provided */
+      0x0006, /* Invalid block or thread coordinates were provided */
   CUDBG_ERROR_INVALID_MEMORY_SEGMENT =
-  0x0007, /* Invalid memory segment requested (read/write) */
+      0x0007, /* Invalid memory segment requested (read/write) */
   CUDBG_ERROR_INVALID_MEMORY_ACCESS = 0x0008, /* Requested address (+size) is
                                                  not within proper segment
                                                  boundaries */
   CUDBG_ERROR_MEMORY_MAPPING_FAILED =
-  0x0009,                    /* Memory is not mapped and cannot be mapped */
+      0x0009,                    /* Memory is not mapped and cannot be mapped */
   CUDBG_ERROR_INTERNAL = 0x000a, /* A debugger internal error occurred */
   CUDBG_ERROR_INVALID_DEVICE = 0x000b,   /* Specified device cannot be found */
   CUDBG_ERROR_INVALID_SM = 0x000c,       /* Specified sm cannot be found */
@@ -1487,52 +1487,53 @@ typedef enum {
   CUDBG_ERROR_INVALID_ADDRESS = 0x0012,  /* address is out-of-range */
   CUDBG_ERROR_INCOMPATIBLE_API = 0x0013, /* API version does not match */
   CUDBG_ERROR_INITIALIZATION_FAILURE =
-  0x0014,                        /* The CUDA Driver failed to initialize */
+      0x0014,                        /* The CUDA Driver failed to initialize */
   CUDBG_ERROR_INVALID_GRID = 0x0015, /* Specified grid cannot be found */
   CUDBG_ERROR_NO_EVENT_AVAILABLE = 0x0016, /* No event left to be processed */
   CUDBG_ERROR_SOME_DEVICES_WATCHDOGGED =
-  0x0017, /* One or more devices have an associated watchdog (eg. X) */
+      0x0017, /* One or more devices have an associated watchdog (eg. X) */
   CUDBG_ERROR_ALL_DEVICES_WATCHDOGGED =
-  0x0018, /* All devices have an associated watchdog (eg. X) */
+      0x0018, /* All devices have an associated watchdog (eg. X) */
   CUDBG_ERROR_INVALID_ATTRIBUTE =
-  0x0019, /* Specified attribute does not exist or is incorrect */
+      0x0019, /* Specified attribute does not exist or is incorrect */
   CUDBG_ERROR_ZERO_CALL_DEPTH =
-  0x001a, /* No function calls have been made on the device */
+      0x001a, /* No function calls have been made on the device */
   CUDBG_ERROR_INVALID_CALL_LEVEL = 0x001b, /* Specified call level is invalid */
   CUDBG_ERROR_COMMUNICATION_FAILURE =
-  0x001c, /* Communication error between the debugger and the application.
+      0x001c, /* Communication error between the debugger and the application.
                */
   CUDBG_ERROR_INVALID_CONTEXT = 0x001d, /* Specified context cannot be found */
   CUDBG_ERROR_ADDRESS_NOT_IN_DEVICE_MEM =
-  0x001e, /* Requested address was not originally allocated from device
-                             memory (most likely visible in system memory) */
+      0x001e, /* Requested address was not originally allocated from device
+                                 memory (most likely visible in system memory)
+               */
   CUDBG_ERROR_MEMORY_UNMAPPING_FAILED =
-  0x001f, /* Memory is not unmapped and cannot be unmapped */
+      0x001f, /* Memory is not unmapped and cannot be unmapped */
   CUDBG_ERROR_INCOMPATIBLE_DISPLAY_DRIVER =
-  0x0020, /* The display driver is incompatible with the API */
+      0x0020, /* The display driver is incompatible with the API */
   CUDBG_ERROR_INVALID_MODULE = 0x0021, /* The specified module is not valid */
   CUDBG_ERROR_LANE_NOT_IN_SYSCALL =
-  0x0022, /* The specified lane is not inside a device syscall */
+      0x0022, /* The specified lane is not inside a device syscall */
   CUDBG_ERROR_MEMCHECK_NOT_ENABLED = 0x0023, /* Memcheck has not been enabled */
   CUDBG_ERROR_INVALID_ENVVAR_ARGS =
-  0x0024, /* Some environment variable's value is invalid */
+      0x0024, /* Some environment variable's value is invalid */
   CUDBG_ERROR_OS_RESOURCES =
-  0x0025, /* Error while allocating resources from the OS */
+      0x0025, /* Error while allocating resources from the OS */
   CUDBG_ERROR_FORK_FAILED =
-  0x0026, /* Error while forking the debugger process */
+      0x0026, /* Error while forking the debugger process */
   CUDBG_ERROR_NO_DEVICE_AVAILABLE =
-  0x0027, /* No CUDA capable device was found */
+      0x0027, /* No CUDA capable device was found */
   CUDBG_ERROR_ATTACH_NOT_POSSIBLE =
-  0x0028, /* Attaching to the CUDA program is not possible */
+      0x0028, /* Attaching to the CUDA program is not possible */
   CUDBG_ERROR_WARP_RESUME_NOT_POSSIBLE =
-  0x0029, /* The resumeWarpsUntilPC() API is not possible, use
-                             resumeDevice() or singleStepWarp() instead */
+      0x0029, /* The resumeWarpsUntilPC() API is not possible, use
+                                 resumeDevice() or singleStepWarp() instead */
   CUDBG_ERROR_INVALID_WARP_MASK =
-  0x002a, /* Specified warp mask is zero, or contains invalid warps */
+      0x002a, /* Specified warp mask is zero, or contains invalid warps */
   CUDBG_ERROR_AMBIGUOUS_MEMORY_ADDRESS =
-  0x002b, /* Address cannot be resolved to a GPU unambiguously */
+      0x002b, /* Address cannot be resolved to a GPU unambiguously */
   CUDBG_ERROR_RECURSIVE_API_CALL =
-  0x002c, /* Debug API entry point called from within a debug API callback
+      0x002c, /* Debug API entry point called from within a debug API callback
                */
 } CUDBGResult;
 
@@ -1890,8 +1891,8 @@ typedef enum CUstreamCaptureStatus_enum {
   CU_STREAM_CAPTURE_STATUS_NONE = 0,   /**< Stream is not capturing */
   CU_STREAM_CAPTURE_STATUS_ACTIVE = 1, /**< Stream is actively capturing */
   CU_STREAM_CAPTURE_STATUS_INVALIDATED =
-  2 /**< Stream is part of a capture sequence that
-               has been invalidated, but not terminated */
+      2 /**< Stream is part of a capture sequence that
+                   has been invalidated, but not terminated */
 } CUstreamCaptureStatus;
 
 /**
@@ -1922,21 +1923,21 @@ typedef unsigned long long CUmemGenericAllocationHandle;
 typedef enum CUgraphExecUpdateResult_enum {
   CU_GRAPH_EXEC_UPDATE_SUCCESS = 0x0, /**< The update succeeded */
   CU_GRAPH_EXEC_UPDATE_ERROR =
-  0x1, /**< The update failed for an unexpected reason which is described in
-              the return value of the function */
+      0x1, /**< The update failed for an unexpected reason which is described in
+                  the return value of the function */
   CU_GRAPH_EXEC_UPDATE_ERROR_TOPOLOGY_CHANGED =
-  0x2, /**< The update failed because the topology changed */
+      0x2, /**< The update failed because the topology changed */
   CU_GRAPH_EXEC_UPDATE_ERROR_NODE_TYPE_CHANGED =
-  0x3, /**< The update failed because a node type changed */
+      0x3, /**< The update failed because a node type changed */
   CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED =
-  0x4, /**< The update failed because the function of a kernel node changed
+      0x4, /**< The update failed because the function of a kernel node changed
             */
   CU_GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED =
-  0x5, /**< The update failed because the parameters changed in a way that
-              is not supported */
+      0x5, /**< The update failed because the parameters changed in a way that
+                  is not supported */
   CU_GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED =
-  0x6 /**< The update failed because something about the node is not
-             supported */
+      0x6 /**< The update failed because something about the node is not
+                 supported */
 } CUgraphExecUpdateResult;
 
 /**
@@ -1957,10 +1958,10 @@ typedef enum CUmemAllocationType_enum {
  */
 typedef enum CUmemAllocationHandleType_enum {
   CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR =
-  0x1, /**< Allows a file descriptor to be used for exporting. Permitted
-              only on POSIX systems. (int) */
+      0x1, /**< Allows a file descriptor to be used for exporting. Permitted
+                  only on POSIX systems. (int) */
   CU_MEM_HANDLE_TYPE_WIN32 =
-  0x2, /**< Allows a Win32 NT handle to be used for exporting. (HANDLE) */
+      0x2, /**< Allows a Win32 NT handle to be used for exporting. (HANDLE) */
   CU_MEM_HANDLE_TYPE_WIN32_KMT = 0x4, /**< Allows a Win32 KMT handle to be used
                                          for exporting. (D3DKMT_HANDLE) */
   CU_MEM_HANDLE_TYPE_MAX = 0xFFFFFFFF
@@ -1972,7 +1973,7 @@ typedef enum CUmemAllocationHandleType_enum {
 typedef enum CUmemLocationType_enum {
   CU_MEM_LOCATION_TYPE_INVALID = 0x0,
   CU_MEM_LOCATION_TYPE_DEVICE =
-  0x1, /**< Location is a device location, thus id is a device ordinal */
+      0x1, /**< Location is a device location, thus id is a device ordinal */
   CU_MEM_LOCATION_TYPE_MAX = 0xFFFFFFFF
 } CUmemLocationType;
 
@@ -2012,9 +2013,9 @@ typedef struct CUmemAllocationProp_st {
  */
 typedef enum CUmemAllocationGranularity_flags_enum {
   CU_MEM_ALLOC_GRANULARITY_MINIMUM =
-  0x0, /**< Minimum required granularity for allocation */
+      0x0, /**< Minimum required granularity for allocation */
   CU_MEM_ALLOC_GRANULARITY_RECOMMENDED =
-  0x1 /**< Recommended granularity for allocation for best performance */
+      0x1 /**< Recommended granularity for allocation for best performance */
 } CUmemAllocationGranularity_flags;
 
 /**
@@ -2022,11 +2023,11 @@ typedef enum CUmemAllocationGranularity_flags_enum {
  */
 typedef enum CUmemAccess_flags_enum {
   CU_MEM_ACCESS_FLAGS_PROT_NONE =
-  0x0, /**< Default, make the address range not accessible */
+      0x0, /**< Default, make the address range not accessible */
   CU_MEM_ACCESS_FLAGS_PROT_READ =
-  0x1, /**< Make the address range read accessible */
+      0x1, /**< Make the address range read accessible */
   CU_MEM_ACCESS_FLAGS_PROT_READWRITE =
-  0x3, /**< Make the address range read-write accessible */
+      0x3, /**< Make the address range read-write accessible */
   CU_MEM_ACCESS_FLAGS_PROT_MAX = 0xFFFFFFFF
 } CUmemAccess_flags;
 
@@ -2044,17 +2045,23 @@ typedef struct CUmemAccessDesc_st {
  * Graph kernel node Attributes
  */
 typedef enum CUkernelNodeAttrID_enum {
-  CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = 1,    /**< Identifier for ::CUkernelNodeAttrValue::accessPolicyWindow. */
-  CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE = 2     /**< Allows a kernel node to be cooperative (see ::cuLaunchCooperativeKernel). */
+  CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW =
+      1, /**< Identifier for ::CUkernelNodeAttrValue::accessPolicyWindow. */
+  CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE =
+      2 /**< Allows a kernel node to be cooperative (see
+           ::cuLaunchCooperativeKernel). */
 } CUkernelNodeAttrID;
 
 /**
- * Specifies performance hint with ::CUaccessPolicyWindow for hitProp and missProp members
+ * Specifies performance hint with ::CUaccessPolicyWindow for hitProp and
+ * missProp members
  */
 typedef enum CUaccessProperty_enum {
-  CU_ACCESS_PROPERTY_NORMAL = 0,    /**< Normal cache persistence. */
-  CU_ACCESS_PROPERTY_STREAMING = 1,    /**< Streaming access is less likely to persit from cache. */
-  CU_ACCESS_PROPERTY_PERSISTING = 2     /**< Persisting access is more likely to persist in cache.*/
+  CU_ACCESS_PROPERTY_NORMAL = 0, /**< Normal cache persistence. */
+  CU_ACCESS_PROPERTY_STREAMING =
+      1, /**< Streaming access is less likely to persit from cache. */
+  CU_ACCESS_PROPERTY_PERSISTING =
+      2 /**< Persisting access is more likely to persist in cache.*/
 } CUaccessProperty;
 
 /**
@@ -2070,27 +2077,36 @@ typedef enum CUaccessProperty_enum {
  * Accesses in a miss segment apply the missProp access policy.
  */
 typedef struct CUaccessPolicyWindow_st {
-  void *base_ptr;                     /**< Starting address of the access policy window. CUDA driver may align it. */
-  size_t num_bytes;                   /**< Size in bytes of the window policy. CUDA driver may restrict the maximum size and alignment. */
-  float hitRatio;                     /**< hitRatio specifies percentage of lines assigned hitProp, rest are assigned missProp. */
-  CUaccessProperty hitProp;           /**< ::CUaccessProperty set for hit. */
-  CUaccessProperty missProp;          /**< ::CUaccessProperty set for miss. Must be either NORMAL or STREAMING */
+  void *base_ptr; /**< Starting address of the access policy window. CUDA driver
+                     may align it. */
+  size_t num_bytes; /**< Size in bytes of the window policy. CUDA driver may
+                       restrict the maximum size and alignment. */
+  float hitRatio; /**< hitRatio specifies percentage of lines assigned hitProp,
+                     rest are assigned missProp. */
+  CUaccessProperty hitProp;  /**< ::CUaccessProperty set for hit. */
+  CUaccessProperty missProp; /**< ::CUaccessProperty set for miss. Must be
+                                either NORMAL or STREAMING */
 } CUaccessPolicyWindow;
 
 /**
- * Graph attributes union, used with ::cuKernelNodeSetAttribute/::cuKernelNodeGetAttribute
+ * Graph attributes union, used with
+ * ::cuKernelNodeSetAttribute/::cuKernelNodeGetAttribute
  */
 typedef union CUkernelNodeAttrValue_union {
-  CUaccessPolicyWindow accessPolicyWindow;    /**< Attribute ::CUaccessPolicyWindow. */
-  int cooperative;                            /**< Nonzero indicates a cooperative kernel (see ::cuLaunchCooperativeKernel). */
+  CUaccessPolicyWindow
+      accessPolicyWindow; /**< Attribute ::CUaccessPolicyWindow. */
+  int cooperative;        /**< Nonzero indicates a cooperative kernel (see
+                             ::cuLaunchCooperativeKernel). */
 } CUkernelNodeAttrValue;
 
 /**
  * Stream Attributes
  */
 typedef enum CUstreamAttrID_enum {
-  CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW = 1,   /**< Identifier for ::CUstreamAttrValue::accessPolicyWindow. */
-  CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY = 3    /**< ::CUsynchronizationPolicy for work queued up in this stream */
+  CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW =
+      1, /**< Identifier for ::CUstreamAttrValue::accessPolicyWindow. */
+  CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY =
+      3 /**< ::CUsynchronizationPolicy for work queued up in this stream */
 } CUstreamAttrID;
 
 typedef enum CUsynchronizationPolicy_enum {
@@ -2101,15 +2117,153 @@ typedef enum CUsynchronizationPolicy_enum {
 } CUsynchronizationPolicy;
 
 /**
- * Stream attributes union, used with ::cuStreamSetAttribute/::cuStreamGetAttribute
+ * Stream attributes union, used with
+ * ::cuStreamSetAttribute/::cuStreamGetAttribute
  */
 typedef union CUstreamAttrValue_union {
-  CUaccessPolicyWindow accessPolicyWindow;   /**< Attribute ::CUaccessPolicyWindow. */
-  CUsynchronizationPolicy syncPolicy;        /**< Value for ::CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY. */
+  CUaccessPolicyWindow
+      accessPolicyWindow; /**< Attribute ::CUaccessPolicyWindow. */
+  CUsynchronizationPolicy
+      syncPolicy; /**< Value for ::CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY.
+                   */
 } CUstreamAttrValue;
+
+/**
+ * CUDA array sparse properties
+ */
+typedef struct CUDA_ARRAY_SPARSE_PROPERTIES_st {
+  struct {
+    unsigned int width;  /**< Width of sparse tile in elements */
+    unsigned int height; /**< Height of sparse tile in elements */
+    unsigned int depth;  /**< Depth of sparse tile in elements */
+  } tileExtent;
+
+  /**
+   * First mip level at which the mip tail begins.
+   */
+  unsigned int miptailFirstLevel;
+  /**
+   * Total size of the mip tail.
+   */
+  unsigned long long miptailSize;
+  /**
+   * Flags will either be zero or ::CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL
+   */
+  unsigned int flags;
+  unsigned int reserved[4];
+} CUDA_ARRAY_SPARSE_PROPERTIES;
+
+typedef struct CUmemPoolHandle_st *CUmemoryPool; /**< CUDA memory pool */
+
+/**
+ * Semaphore signal node parameters
+ */
+typedef struct CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st {
+  CUexternalSemaphore *extSemArray;
+  const CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS *paramsArray;
+  unsigned int numExtSems;
+} CUDA_EXT_SEM_SIGNAL_NODE_PARAMS;
+
+/**
+ * Semaphore wait node parameters
+ */
+typedef struct CUDA_EXT_SEM_WAIT_NODE_PARAMS_st {
+  CUexternalSemaphore *extSemArray;
+  const CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS *paramsArray;
+  unsigned int numExtSems;
+} CUDA_EXT_SEM_WAIT_NODE_PARAMS;
+
+/**
+ * Sparse subresource types
+ */
+typedef enum CUarraySparseSubresourceType_enum {
+  CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL = 0,
+  CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL = 1
+} CUarraySparseSubresourceType;
+
+/**
+ * Memory operation types
+ */
+typedef enum CUmemOperationType_enum {
+  CU_MEM_OPERATION_TYPE_MAP = 1,
+  CU_MEM_OPERATION_TYPE_UNMAP = 2
+} CUmemOperationType;
+
+/**
+ * Memory handle types
+ */
+typedef enum CUmemHandleType_enum {
+  CU_MEM_HANDLE_TYPE_GENERIC = 0
+} CUmemHandleType;
+
+/**
+ * Specifies the CUDA array or CUDA mipmapped array memory mapping information
+ */
+typedef struct CUarrayMapInfo_st {
+  CUresourcetype resourceType; /**< Resource type */
+
+  union {
+    CUmipmappedArray mipmap;
+    CUarray array;
+  } resource;
+
+  CUarraySparseSubresourceType subresourceType; /**< Sparse subresource type */
+
+  union {
+    struct {
+      unsigned int level;   /**< For CUDA mipmapped arrays must a valid mipmap
+                               level. For CUDA arrays must be zero */
+      unsigned int layer;   /**< For CUDA layered arrays must be a valid layer
+                               index. Otherwise, must be zero */
+      unsigned int offsetX; /**< Starting X offset in elements */
+      unsigned int offsetY; /**< Starting Y offset in elements */
+      unsigned int offsetZ; /**< Starting Z offset in elements */
+      unsigned int extentWidth;  /**< Width in elements */
+      unsigned int extentHeight; /**< Height in elements */
+      unsigned int extentDepth;  /**< Depth in elements */
+    } sparseLevel;
+    struct {
+      unsigned int layer; /**< For CUDA layered arrays must be a valid layer
+                             index. Otherwise, must be zero */
+      unsigned long long offset; /**< Offset within mip tail */
+      unsigned long long size;   /**< Extent in bytes */
+    } miptail;
+  } subresource;
+
+  CUmemOperationType memOperationType; /**< Memory operation type */
+  CUmemHandleType memHandleType;       /**< Memory handle type */
+
+  union {
+    CUmemGenericAllocationHandle memHandle;
+  } memHandle;
+
+  unsigned long long offset;  /**< Offset within the memory */
+  unsigned int deviceBitMask; /**< Device ordinal bit mask */
+  unsigned int flags;         /**< flags for future use, must be zero now. */
+  unsigned int reserved[2];   /**< Reserved for future use, must be zero now. */
+} CUarrayMapInfo;
+
+typedef struct CUmemPoolProps_st {
+  CUmemAllocationType allocType;
+  CUmemAllocationHandleType handleTypes;
+  CUmemLocation location;
+  void *win32SecurityAttributes;
+  unsigned char reserved[64];
+} CUmemPoolProps;
+
+typedef struct CUmemPoolPtrExportData_st {
+  unsigned char reserved[64];
+} CUmemPoolPtrExportData;
+
+typedef enum CUmemPool_attribute_enum {
+  CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES = 1,
+  CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC,
+  CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES,
+  CU_MEMPOOL_ATTR_RELEASE_THRESHOLD
+} CUmemPool_attribute;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif  // HIJACK_CUDA_SUBSET_H
+#endif // HIJACK_CUDA_SUBSET_H

@@ -37,11 +37,11 @@ extern "C" {
 
 #define NVML_FIND_ENTRY(table, sym) ({ (table)[NVML_ENTRY_ENUM(sym)].fn_ptr; })
 
-#define NVML_ENTRY_CALL(table, sym, ...)               \
-  ({                                                   \
-    LOGGER(5, "Hijacking %s\n", #sym);                 \
-    driver_sym_t _entry = NVML_FIND_ENTRY(table, sym); \
-    _entry(__VA_ARGS__);                               \
+#define NVML_ENTRY_CALL(table, sym, ...)                                       \
+  ({                                                                           \
+    LOGGER(5, "Hijacking %s\n", #sym);                                         \
+    driver_sym_t _entry = NVML_FIND_ENTRY(table, sym);                         \
+    _entry(__VA_ARGS__);                                                       \
   })
 
 typedef nvmlReturn_t (*driver_sym_t)();
@@ -526,7 +526,20 @@ typedef enum {
   NVML_ENTRY_ENUM(nvmlVgpuInstanceClearAccountingPids),
   /** nvmlVgpuInstanceGetMdevUUID */
   NVML_ENTRY_ENUM(nvmlVgpuInstanceGetMdevUUID),
-
+  /** nvmlComputeInstanceGetInfo_v2 */
+  NVML_ENTRY_ENUM(nvmlComputeInstanceGetInfo_v2),
+  /** nvmlDeviceGetComputeRunningProcesses_v2 */
+  NVML_ENTRY_ENUM(nvmlDeviceGetComputeRunningProcesses_v2),
+  /** nvmlDeviceGetGraphicsRunningProcesses_v2 */
+  NVML_ENTRY_ENUM(nvmlDeviceGetGraphicsRunningProcesses_v2),
+  /** nvmlDeviceSetTemperatureThreshold */
+  NVML_ENTRY_ENUM(nvmlDeviceSetTemperatureThreshold),
+  /** nvmlRetry_NvRmControl */
+  NVML_ENTRY_ENUM(nvmlRetry_NvRmControl),
+  /** nvmlVgpuInstanceGetGpuInstanceId */
+  NVML_ENTRY_ENUM(nvmlVgpuInstanceGetGpuInstanceId),
+  /** nvmlVgpuTypeGetGpuInstanceProfileId */
+  NVML_ENTRY_ENUM(nvmlVgpuTypeGetGpuInstanceProfileId),
   NVML_ENTRY_END
 } nvml_entry_enum_t;
 
@@ -534,4 +547,4 @@ typedef enum {
 }
 #endif
 
-#endif  // HIJACK_NVML_HELPER_H
+#endif // HIJACK_NVML_HELPER_H

@@ -37,22 +37,22 @@ extern "C" {
 
 #define CUDA_FIND_ENTRY(table, sym) ({ (table)[CUDA_ENTRY_ENUM(sym)].fn_ptr; })
 
-#define CUDA_ENTRY_CALL(table, sym, ...)             \
-  ({                                                 \
-    cuda_sym_t _entry = CUDA_FIND_ENTRY(table, sym); \
-    _entry(__VA_ARGS__);                             \
+#define CUDA_ENTRY_CALL(table, sym, ...)                                       \
+  ({                                                                           \
+    cuda_sym_t _entry = CUDA_FIND_ENTRY(table, sym);                           \
+    _entry(__VA_ARGS__);                                                       \
   })
 
-#define CUDA_ENTRY_DEBUG_VOID_CALL(table, sym, ...)             \
-  ({                                                            \
-    cuda_debug_void_sym_t _entry = CUDA_FIND_ENTRY(table, sym); \
-    _entry(__VA_ARGS__);                                        \
+#define CUDA_ENTRY_DEBUG_VOID_CALL(table, sym, ...)                            \
+  ({                                                                           \
+    cuda_debug_void_sym_t _entry = CUDA_FIND_ENTRY(table, sym);                \
+    _entry(__VA_ARGS__);                                                       \
   })
 
-#define CUDA_ENTRY_DEBUG_RESULT_CALL(table, sym, ...)             \
-  ({                                                              \
-    cuda_debug_result_sym_t _entry = CUDA_FIND_ENTRY(table, sym); \
-    _entry(__VA_ARGS__);                                          \
+#define CUDA_ENTRY_DEBUG_RESULT_CALL(table, sym, ...)                          \
+  ({                                                                           \
+    cuda_debug_result_sym_t _entry = CUDA_FIND_ENTRY(table, sym);              \
+    _entry(__VA_ARGS__);                                                       \
   })
 
 /**
@@ -978,7 +978,106 @@ typedef enum {
   CUDA_ENTRY_ENUM(cuStreamSetAttribute),
   /** cuStreamSetAttribute_ptsz */
   CUDA_ENTRY_ENUM(cuStreamSetAttribute_ptsz),
-
+  /** 11.2 */
+  /** cuArrayGetPlane */
+  CUDA_ENTRY_ENUM(cuArrayGetPlane),
+  /** cuArrayGetSparseProperties */
+  CUDA_ENTRY_ENUM(cuArrayGetSparseProperties),
+  /** cuDeviceGetDefaultMemPool */
+  CUDA_ENTRY_ENUM(cuDeviceGetDefaultMemPool),
+  /** cuDeviceGetLuid */
+  CUDA_ENTRY_ENUM(cuDeviceGetLuid),
+  /** cuDeviceGetMemPool */
+  CUDA_ENTRY_ENUM(cuDeviceGetMemPool),
+  /** cuDeviceGetTexture1DLinearMaxWidth */
+  CUDA_ENTRY_ENUM(cuDeviceGetTexture1DLinearMaxWidth),
+  /** cuDeviceSetMemPool */
+  CUDA_ENTRY_ENUM(cuDeviceSetMemPool),
+  /** cuEventRecordWithFlags */
+  CUDA_ENTRY_ENUM(cuEventRecordWithFlags),
+  /** cuEventRecordWithFlags_ptsz */
+  CUDA_ENTRY_ENUM(cuEventRecordWithFlags_ptsz),
+  /** cuGraphAddEventRecordNode */
+  CUDA_ENTRY_ENUM(cuGraphAddEventRecordNode),
+  /** cuGraphAddEventWaitNode */
+  CUDA_ENTRY_ENUM(cuGraphAddEventWaitNode),
+  /** cuGraphAddExternalSemaphoresSignalNode */
+  CUDA_ENTRY_ENUM(cuGraphAddExternalSemaphoresSignalNode),
+  /** cuGraphAddExternalSemaphoresWaitNode */
+  CUDA_ENTRY_ENUM(cuGraphAddExternalSemaphoresWaitNode),
+  /** cuGraphEventRecordNodeGetEvent */
+  CUDA_ENTRY_ENUM(cuGraphEventRecordNodeGetEvent),
+  /** cuGraphEventRecordNodeSetEvent */
+  CUDA_ENTRY_ENUM(cuGraphEventRecordNodeSetEvent),
+  /** cuGraphEventWaitNodeGetEvent */
+  CUDA_ENTRY_ENUM(cuGraphEventWaitNodeGetEvent),
+  /** cuGraphEventWaitNodeSetEvent */
+  CUDA_ENTRY_ENUM(cuGraphEventWaitNodeSetEvent),
+  /** cuGraphExecChildGraphNodeSetParams */
+  CUDA_ENTRY_ENUM(cuGraphExecChildGraphNodeSetParams),
+  /** cuGraphExecEventRecordNodeSetEvent */
+  CUDA_ENTRY_ENUM(cuGraphExecEventRecordNodeSetEvent),
+  /** cuGraphExecEventWaitNodeSetEvent */
+  CUDA_ENTRY_ENUM(cuGraphExecEventWaitNodeSetEvent),
+  /** cuGraphExecExternalSemaphoresSignalNodeSetParams */
+  CUDA_ENTRY_ENUM(cuGraphExecExternalSemaphoresSignalNodeSetParams),
+  /** cuGraphExecExternalSemaphoresWaitNodeSetParams */
+  CUDA_ENTRY_ENUM(cuGraphExecExternalSemaphoresWaitNodeSetParams),
+  /** cuGraphExternalSemaphoresSignalNodeGetParams */
+  CUDA_ENTRY_ENUM(cuGraphExternalSemaphoresSignalNodeGetParams),
+  /** cuGraphExternalSemaphoresSignalNodeSetParams */
+  CUDA_ENTRY_ENUM(cuGraphExternalSemaphoresSignalNodeSetParams),
+  /** cuGraphExternalSemaphoresWaitNodeGetParams */
+  CUDA_ENTRY_ENUM(cuGraphExternalSemaphoresWaitNodeGetParams),
+  /** cuGraphExternalSemaphoresWaitNodeSetParams */
+  CUDA_ENTRY_ENUM(cuGraphExternalSemaphoresWaitNodeSetParams),
+  /** cuGraphUpload */
+  CUDA_ENTRY_ENUM(cuGraphUpload),
+  /** cuGraphUpload_ptsz */
+  CUDA_ENTRY_ENUM(cuGraphUpload_ptsz),
+  /** cuIpcOpenMemHandle_v2 */
+  CUDA_ENTRY_ENUM(cuIpcOpenMemHandle_v2),
+  /** memory pool should be concerned ? */
+  /** cuMemAllocAsync */
+  CUDA_ENTRY_ENUM(cuMemAllocAsync),
+  /** cuMemAllocAsync_ptsz */
+  CUDA_ENTRY_ENUM(cuMemAllocAsync_ptsz),
+  /** cuMemAllocFromPoolAsync */
+  CUDA_ENTRY_ENUM(cuMemAllocFromPoolAsync),
+  /** cuMemAllocFromPoolAsync_ptsz */
+  CUDA_ENTRY_ENUM(cuMemAllocFromPoolAsync_ptsz),
+  /** cuMemFreeAsync */
+  CUDA_ENTRY_ENUM(cuMemFreeAsync),
+  /** cuMemFreeAsync_ptsz */
+  CUDA_ENTRY_ENUM(cuMemFreeAsync_ptsz),
+  /** cuMemMapArrayAsync */
+  CUDA_ENTRY_ENUM(cuMemMapArrayAsync),
+  /** cuMemMapArrayAsync_ptsz */
+  CUDA_ENTRY_ENUM(cuMemMapArrayAsync_ptsz),
+  /** cuMemPoolCreate */
+  CUDA_ENTRY_ENUM(cuMemPoolCreate),
+  /** cuMemPoolDestroy */
+  CUDA_ENTRY_ENUM(cuMemPoolDestroy),
+  /** cuMemPoolExportPointer */
+  CUDA_ENTRY_ENUM(cuMemPoolExportPointer),
+  /** cuMemPoolExportToShareableHandle */
+  CUDA_ENTRY_ENUM(cuMemPoolExportToShareableHandle),
+  /** cuMemPoolGetAccess */
+  CUDA_ENTRY_ENUM(cuMemPoolGetAccess),
+  /** cuMemPoolGetAttribute */
+  CUDA_ENTRY_ENUM(cuMemPoolGetAttribute),
+  /** cuMemPoolImportFromShareableHandle */
+  CUDA_ENTRY_ENUM(cuMemPoolImportFromShareableHandle),
+  /** cuMemPoolImportPointer */
+  CUDA_ENTRY_ENUM(cuMemPoolImportPointer),
+  /** cuMemPoolSetAccess */
+  CUDA_ENTRY_ENUM(cuMemPoolSetAccess),
+  /** cuMemPoolSetAttribute */
+  CUDA_ENTRY_ENUM(cuMemPoolSetAttribute),
+  /** cuMemPoolTrimTo */
+  CUDA_ENTRY_ENUM(cuMemPoolTrimTo),
+  /** cuMipmappedArrayGetSparseProperties */
+  CUDA_ENTRY_ENUM(cuMipmappedArrayGetSparseProperties),
   CUDA_ENTRY_END
 } cuda_entry_enum_t;
 
@@ -1001,4 +1100,4 @@ typedef CUDBGResult (*cuda_debug_result_sym_t)();
 }
 #endif
 
-#endif  // HIJACK_CUDA_HELPER_H
+#endif // HIJACK_CUDA_HELPER_H
