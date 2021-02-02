@@ -2,6 +2,11 @@
 FROM nvidia/cuda:11.2.0-devel-ubuntu18.04 as build
 
 RUN apt update && apt install -y --no-install-recommends \
+  curl
+
+RUN curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | apt-key add -
+
+RUN apt install -y --no-install-recommends \
   cmake libvdpau-dev && \
   rm -rf /var/lib/apt/lists/*
 
