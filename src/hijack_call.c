@@ -460,8 +460,6 @@ static void initialization() {
   int ret;
   const char *cuda_err_string = NULL;
 
-  NVML_ENTRY_CALL(nvml_library_entry, nvmlInit);
-
   ret = CUDA_ENTRY_CALL(cuda_library_entry, cuInit, 0);
   if (unlikely(ret)) {
     LOGGER(FATAL, "cuInit error %s",

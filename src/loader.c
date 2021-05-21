@@ -841,6 +841,9 @@ static void load_driver_libraries() {
   }
 
   dlclose(table);
+
+  // Initialize the ml driver
+  NVML_ENTRY_CALL(nvml_library_entry, nvmlInit);
 }
 
 static void load_cuda_single_library(int idx) {
