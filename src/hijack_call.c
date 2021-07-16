@@ -184,10 +184,15 @@ int delta(int up_limit, int user_current, int share) {
   int utilization_diff =
       abs(up_limit - user_current) < 5 ? 5 : abs(up_limit - user_current);
   int increment =
-      g_sm_num * g_sm_num * g_max_thread_per_sm * utilization_diff / 2560;
+      g_sm_num * g_sm_num * g_max_thread_per_sm / 256 * utilization_diff / 10;
+
   /* Accelerate cuda cores allocation when utilization vary widely */
   if (utilization_diff > up_limit / 2) {
     increment = increment * utilization_diff * 2 / (up_limit + 1);
+  }
+
+  if (unlikely(increment < 0)) {
+    LOGGER(3, "overflow: %d, current sm: %d, thread_per_sm: %d, diff: %d", increment, g_sm_num, g_max_thread_per_sm, utilization_diff);
   }
 
   if (user_current <= up_limit) {
