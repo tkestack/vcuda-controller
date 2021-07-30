@@ -843,7 +843,13 @@ static void load_driver_libraries() {
   dlclose(table);
 
   // Initialize the ml driver
-  NVML_ENTRY_CALL(nvml_library_entry, nvmlInit);
+  if (NVML_FIND_ENTRY(nvml_library_entry, nvmlInitWithFlags)) {
+    NVML_ENTRY_CALL(nvml_library_entry, nvmlInitWithFlags, 0);
+  } else if (NVML_FIND_ENTRY(nvml_library_entry, nvmlInit_v2)) {
+    NVML_ENTRY_CALL(nvml_library_entry, nvmlInit_v2);
+  } else {
+    NVML_ENTRY_CALL(nvml_library_entry, nvmlInit);
+  }
 }
 
 static void load_cuda_single_library(int idx) {
