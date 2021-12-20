@@ -78,6 +78,10 @@ CUresult cuDevicePrimaryCtxReset(CUdevice dev) {
   return CUDA_ENTRY_CALL(cuda_library_entry, cuDevicePrimaryCtxReset, dev);
 }
 
+CUresult cuCtxCreate_v3(CUcontext *pctx, unsigned int flags, CUdevice dev) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuCtxCreate_v3, pctx, flags, dev);
+}
+
 CUresult cuCtxCreate_v2(CUcontext *pctx, unsigned int flags, CUdevice dev) {
   return CUDA_ENTRY_CALL(cuda_library_entry, cuCtxCreate_v2, pctx, flags, dev);
 }
@@ -1915,6 +1919,10 @@ CUresult cuDestroyExternalSemaphore(CUexternalSemaphore extSem) {
                          extSem);
 }
 
+CUresult cuDeviceGetUuid_v2(CUuuid *uuid, CUdevice dev) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuDeviceGetUuid_v2, uuid, dev);
+}
+
 CUresult cuDeviceGetUuid(CUuuid *uuid, CUdevice dev) {
   return CUDA_ENTRY_CALL(cuda_library_entry, cuDeviceGetUuid, uuid, dev);
 }
@@ -2243,11 +2251,25 @@ CUresult cuStreamBeginCapture_v2_ptsz(CUstream hStream) {
                          hStream);
 }
 
+CUresult cuStreamGetCaptureInfo_v2(CUstream hStream,
+                                   CUstreamCaptureStatus *captureStatus,
+                                   cuuint64_t *id) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuStreamGetCaptureInfo_v2, hStream,
+                         captureStatus, id);
+}
+
 CUresult cuStreamGetCaptureInfo(CUstream hStream,
                                 CUstreamCaptureStatus *captureStatus,
                                 cuuint64_t *id) {
   return CUDA_ENTRY_CALL(cuda_library_entry, cuStreamGetCaptureInfo, hStream,
                          captureStatus, id);
+}
+
+CUresult cuStreamGetCaptureInfo_v2_ptsz(CUstream hStream,
+                                        CUstreamCaptureStatus *captureStatus,
+                                        cuuint64_t *id) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuStreamGetCaptureInfo_v2_ptsz,
+                         hStream, captureStatus, id);
 }
 
 CUresult cuStreamGetCaptureInfo_ptsz(CUstream hStream,
@@ -2750,4 +2772,128 @@ CUresult cuMipmappedArrayGetSparseProperties(
   return CUDA_ENTRY_CALL(cuda_library_entry,
                          cuMipmappedArrayGetSparseProperties, sparseProperties,
                          mipmap);
+}
+
+CUresult cuCtxGetExecAffinity(CUexecAffinityParam *pExecAffinity,
+                              CUexecAffinityType type) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuCtxGetExecAffinity,
+                         pExecAffinity, type);
+}
+
+CUresult cuDeviceGetExecAffinitySupport(int *pi, CUexecAffinityType type,
+                                        CUdevice dev) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuDeviceGetExecAffinitySupport, pi,
+                         type, dev);
+}
+
+CUresult cuDeviceGetGraphMemAttribute(CUdevice device,
+                                      CUgraphMem_attribute attr, void *value) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuDeviceGetGraphMemAttribute,
+                         device, attr, value);
+}
+
+CUresult cuDeviceGraphMemTrim(CUdevice device) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuDeviceGraphMemTrim, device);
+}
+
+CUresult cuDeviceSetGraphMemAttribute(CUdevice device,
+                                      CUgraphMem_attribute attr, void *value) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuDeviceSetGraphMemAttribute,
+                         device, attr, value);
+}
+
+CUresult cuFlushGPUDirectRDMAWrites(CUflushGPUDirectRDMAWritesTarget target,
+                                    CUflushGPUDirectRDMAWritesScope scope) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuFlushGPUDirectRDMAWrites, target,
+                         scope);
+}
+
+CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
+                          cuuint64_t flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGetProcAddress, symbol, pfn,
+                         cudaVersion, flags);
+}
+
+CUresult cuGraphAddMemAllocNode(CUgraphNode *phGraphNode, CUgraph hGraph,
+                                const CUgraphNode *dependencies,
+                                size_t numDependencies,
+                                CUDA_MEM_ALLOC_NODE_PARAMS *nodeParams) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphAddMemAllocNode,
+                         phGraphNode, hGraph, dependencies, numDependencies,
+                         nodeParams);
+}
+
+CUresult cuGraphAddMemFreeNode(CUgraphNode *phGraphNode, CUgraph hGraph,
+                               const CUgraphNode *dependencies,
+                               size_t numDependencies, CUdeviceptr dptr) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphAddMemFreeNode, phGraphNode,
+                         hGraph, dependencies, numDependencies, dptr);
+}
+
+CUresult cuGraphDebugDotPrint(CUgraph hGraph, const char *path,
+                              unsigned int flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphDebugDotPrint, hGraph, path,
+                         flags);
+}
+
+CUresult cuGraphInstantiateWithFlags(CUgraphExec *phGraphExec, CUgraph hGraph,
+                                     unsigned long long flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphInstantiateWithFlags,
+                         phGraphExec, hGraph, flags);
+}
+
+CUresult cuGraphMemAllocNodeGetParams(CUgraphNode hNode,
+                                      CUDA_MEM_ALLOC_NODE_PARAMS *params_out) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphMemAllocNodeGetParams,
+                         hNode, params_out);
+}
+
+CUresult cuGraphMemFreeNodeGetParams(CUgraphNode hNode, CUdeviceptr *dptr_out) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphMemFreeNodeGetParams, hNode,
+                         dptr_out);
+}
+
+CUresult cuGraphReleaseUserObject(CUgraph graph, CUuserObject object,
+                                  unsigned int count) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphReleaseUserObject, graph,
+                         object, count);
+}
+
+CUresult cuGraphRetainUserObject(CUgraph graph, CUuserObject object,
+                                 unsigned int count, unsigned int flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuGraphRetainUserObject, graph,
+                         object, count, flags);
+}
+
+CUresult cuStreamUpdateCaptureDependencies(CUstream hStream,
+                                           CUgraphNode *dependencies,
+                                           size_t numDependencies,
+                                           unsigned int flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuStreamUpdateCaptureDependencies,
+                         hStream, dependencies, numDependencies, flags);
+}
+
+CUresult cuStreamUpdateCaptureDependencies_ptsz(CUstream hStream,
+                                                CUgraphNode *dependencies,
+                                                size_t numDependencies,
+                                                unsigned int flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry,
+                         cuStreamUpdateCaptureDependencies_ptsz, hStream,
+                         dependencies, numDependencies, flags);
+}
+
+CUresult cuUserObjectCreate(CUuserObject *object_out, void *ptr,
+                            CUhostFn destroy, unsigned int initialRefcount,
+                            unsigned int flags) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuUserObjectCreate, object_out,
+                         ptr, destroy, initialRefcount, flags);
+}
+
+CUresult cuUserObjectRelease(CUuserObject object, unsigned int count) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuUserObjectRelease, object,
+                         count);
+}
+
+CUresult cuUserObjectRetain(CUuserObject object, unsigned int count) {
+  return CUDA_ENTRY_CALL(cuda_library_entry, cuUserObjectRetain, object, count);
 }
