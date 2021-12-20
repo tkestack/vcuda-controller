@@ -2262,6 +2262,105 @@ typedef enum CUmemPool_attribute_enum {
   CU_MEMPOOL_ATTR_RELEASE_THRESHOLD
 } CUmemPool_attribute;
 
+/**
+ * Execution Affinity Types
+ */
+typedef enum CUexecAffinityType_enum {
+  CU_EXEC_AFFINITY_TYPE_SM_COUNT = 0, /**< Create a context with limited SMs. */
+  CU_EXEC_AFFINITY_TYPE_MAX
+} CUexecAffinityType;
+
+/**
+ * Value for ::CU_EXEC_AFFINITY_TYPE_SM_COUNT
+ */
+typedef struct CUexecAffinitySmCount_st {
+  unsigned int val; /**< The number of SMs the context is limited to use. */
+} CUexecAffinitySmCount_v1;
+typedef CUexecAffinitySmCount_v1 CUexecAffinitySmCount;
+
+/**
+ * Execution Affinity Parameters
+ */
+typedef struct CUexecAffinityParam_st {
+  CUexecAffinityType type;
+  union {
+    CUexecAffinitySmCount
+        smCount; /** Value for ::CU_EXEC_AFFINITY_TYPE_SM_COUNT */
+  } param;
+} CUexecAffinityParam_v1;
+typedef CUexecAffinityParam_v1 CUexecAffinityParam;
+
+typedef enum CUgraphMem_attribute_enum {
+  /**
+   * (value type = cuuint64_t)
+   * Amount of memory, in bytes, currently associated with graphs
+   */
+  CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT,
+
+  /**
+   * (value type = cuuint64_t)
+   * High watermark of memory, in bytes, associated with graphs since the
+   * last time it was reset.  High watermark can only be reset to zero.
+   */
+  CU_GRAPH_MEM_ATTR_USED_MEM_HIGH,
+
+  /**
+   * (value type = cuuint64_t)
+   * Amount of memory, in bytes, currently allocated for use by
+   * the CUDA graphs asynchronous allocator.
+   */
+  CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT,
+
+  /**
+   * (value type = cuuint64_t)
+   * High watermark of memory, in bytes, currently allocated for use by
+   * the CUDA graphs asynchronous allocator.
+   */
+  CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH
+} CUgraphMem_attribute;
+
+/**
+ * Memory allocation node parameters
+ */
+typedef struct CUDA_MEM_ALLOC_NODE_PARAMS_st {
+  /**
+   * in: location where the allocation should reside (specified in ::location).
+   * ::handleTypes must be ::CU_MEM_HANDLE_TYPE_NONE. IPC is not supported.
+   */
+  CUmemPoolProps poolProps;
+  const CUmemAccessDesc
+      *accessDescs;       /**< in: array of memory access descriptors. Used to
+                             describe peer GPU access */
+  size_t accessDescCount; /**< in: number of memory access descriptors.  Must
+                             not exceed the number of GPUs. */
+  size_t bytesize;        /**< in: size in bytes of the requested allocation */
+  CUdeviceptr dptr; /**< out: address of the allocation returned by CUDA */
+} CUDA_MEM_ALLOC_NODE_PARAMS;
+
+typedef struct CUuserObject_st
+    *CUuserObject; /**< CUDA user object for graphs */
+
+/**
+ * The targets for ::cuFlushGPUDirectRDMAWrites
+ */
+typedef enum CUflushGPUDirectRDMAWritesTarget_enum {
+  CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX =
+      0 /**< Sets the target for ::cuFlushGPUDirectRDMAWrites() to the currently
+           active CUDA device context. */
+} CUflushGPUDirectRDMAWritesTarget;
+
+/**
+ * The scopes for ::cuFlushGPUDirectRDMAWrites
+ */
+typedef enum CUflushGPUDirectRDMAWritesScope_enum {
+  CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER =
+      100, /**< Blocks until remote writes are visible to the CUDA device
+              context owning the data. */
+  CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES =
+      200 /**< Blocks until remote writes are visible to all CUDA device
+             contexts. */
+} CUflushGPUDirectRDMAWritesScope;
+
 #ifdef __cplusplus
 }
 #endif

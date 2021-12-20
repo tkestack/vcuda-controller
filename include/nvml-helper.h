@@ -540,6 +540,19 @@ typedef enum {
   NVML_ENTRY_ENUM(nvmlVgpuInstanceGetGpuInstanceId),
   /** nvmlVgpuTypeGetGpuInstanceProfileId */
   NVML_ENTRY_ENUM(nvmlVgpuTypeGetGpuInstanceProfileId),
+  NVML_ENTRY_ENUM(nvmlDeviceCreateGpuInstanceWithPlacement),
+  NVML_ENTRY_ENUM(nvmlDeviceGetBusType),
+  NVML_ENTRY_ENUM(nvmlDeviceGetClkMonStatus),
+  NVML_ENTRY_ENUM(nvmlDeviceGetGpuInstancePossiblePlacements_v2),
+  NVML_ENTRY_ENUM(nvmlDeviceGetGridLicensableFeatures_v4),
+  NVML_ENTRY_ENUM(nvmlDeviceGetIrqNum),
+  NVML_ENTRY_ENUM(nvmlDeviceGetMPSComputeRunningProcesses_v2),
+  NVML_ENTRY_ENUM(nvmlDeviceGetNvLinkRemoteDeviceType),
+  NVML_ENTRY_ENUM(nvmlDeviceResetMemoryLockedClocks),
+  NVML_ENTRY_ENUM(nvmlDeviceSetMemoryLockedClocks),
+  NVML_ENTRY_ENUM(nvmlGetExcludedDeviceCount),
+  NVML_ENTRY_ENUM(nvmlGetExcludedDeviceInfoByIndex),
+  NVML_ENTRY_ENUM(nvmlVgpuInstanceGetLicenseInfo),
   NVML_ENTRY_END
 } nvml_entry_enum_t;
 

@@ -396,6 +396,14 @@ nvmlReturn_t nvmlDeviceGetGraphicsRunningProcesses(nvmlDevice_t device,
                          infoCount, infos);
 }
 
+nvmlReturn_t nvmlDeviceGetGridLicensableFeatures_v4(
+    nvmlDevice_t device,
+    nvmlGridLicensableFeatures_t *pGridLicensableFeatures) {
+  return NVML_ENTRY_CALL(nvml_library_entry,
+                         nvmlDeviceGetGridLicensableFeatures_v4, device,
+                         pGridLicensableFeatures);
+}
+
 nvmlReturn_t nvmlDeviceGetGridLicensableFeatures(
     nvmlDevice_t device,
     nvmlGridLicensableFeatures_t *pGridLicensableFeatures) {
@@ -500,6 +508,14 @@ nvmlReturn_t nvmlDeviceGetMinorNumber(nvmlDevice_t device,
 }
 
 // Guessed function proto type
+nvmlReturn_t nvmlDeviceGetMPSComputeRunningProcesses_v2(nvmlDevice_t device,
+                                                        unsigned int *infoCount,
+                                                        void *infos) {
+  return NVML_ENTRY_CALL(nvml_library_entry,
+                         nvmlDeviceGetMPSComputeRunningProcesses_v2, device,
+                         infoCount, infos);
+}
+
 nvmlReturn_t nvmlDeviceGetMPSComputeRunningProcesses(nvmlDevice_t device,
                                                      unsigned int *infoCount,
                                                      void *infos) {
@@ -1418,6 +1434,14 @@ nvmlReturn_t nvmlDeviceGetGpuInstanceId(nvmlDevice_t device, unsigned int *id) {
                          id);
 }
 
+nvmlReturn_t nvmlDeviceGetGpuInstancePossiblePlacements_v2(
+    nvmlDevice_t device, unsigned int profileId,
+    nvmlGpuInstancePlacement_t *placements, unsigned int *count) {
+  return NVML_ENTRY_CALL(nvml_library_entry,
+                         nvmlDeviceGetGpuInstancePossiblePlacements_v2, device,
+                         profileId, placements, count);
+}
+
 nvmlReturn_t nvmlDeviceGetGpuInstancePossiblePlacements(
     nvmlDevice_t device, unsigned int profileId,
     nvmlGpuInstancePlacement_t *placements, unsigned int *count) {
@@ -1618,4 +1642,65 @@ nvmlVgpuTypeGetGpuInstanceProfileId(nvmlVgpuTypeId_t vgpuTypeId,
   return NVML_ENTRY_CALL(nvml_library_entry,
                          nvmlVgpuTypeGetGpuInstanceProfileId, vgpuTypeId,
                          gpuInstanceProfileId);
+}
+
+nvmlReturn_t nvmlDeviceCreateGpuInstanceWithPlacement(
+    nvmlDevice_t device, unsigned int profileId,
+    const nvmlGpuInstancePlacement_t *placement,
+    nvmlGpuInstance_t *gpuInstance) {
+  return NVML_ENTRY_CALL(nvml_library_entry,
+                         nvmlDeviceCreateGpuInstanceWithPlacement, device,
+                         profileId, placement, gpuInstance);
+}
+
+nvmlReturn_t nvmlDeviceGetBusType(nvmlDevice_t device, nvmlBusType_t *type) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetBusType, device,
+                         type);
+}
+
+nvmlReturn_t nvmlDeviceGetClkMonStatus(nvmlDevice_t device,
+                                       nvmlClkMonStatus_t *status) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetClkMonStatus, device,
+                         status);
+}
+
+nvmlReturn_t nvmlDeviceGetIrqNum(nvmlDevice_t device, unsigned int *irqNum) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetIrqNum);
+}
+
+nvmlReturn_t nvmlDeviceGetNvLinkRemoteDeviceType(
+    nvmlDevice_t device, unsigned int link,
+    nvmlIntNvLinkDeviceType_t *pNvLinkDeviceType) {
+  return NVML_ENTRY_CALL(nvml_library_entry,
+                         nvmlDeviceGetNvLinkRemoteDeviceType, device, link,
+                         pNvLinkDeviceType);
+}
+
+nvmlReturn_t nvmlDeviceResetMemoryLockedClocks(nvmlDevice_t device) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceResetMemoryLockedClocks,
+                         device);
+}
+
+nvmlReturn_t nvmlDeviceSetMemoryLockedClocks(nvmlDevice_t device,
+                                             unsigned int minMemClockMHz,
+                                             unsigned int maxMemClockMHz) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceSetMemoryLockedClocks,
+                         device, minMemClockMHz, maxMemClockMHz);
+}
+
+nvmlReturn_t nvmlGetExcludedDeviceCount(unsigned int *deviceCount) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlGetExcludedDeviceCount,
+                         deviceCount);
+}
+
+nvmlReturn_t nvmlGetExcludedDeviceInfoByIndex(unsigned int index,
+                                              nvmlExcludedDeviceInfo_t *info) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlGetExcludedDeviceInfoByIndex,
+                         index, info);
+}
+
+nvmlReturn_t
+nvmlVgpuInstanceGetLicenseInfo(nvmlVgpuInstance_t vgpuInstance,
+                               nvmlVgpuLicenseInfo_t *licenseInfo) {
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlVgpuInstanceGetLicenseInfo);
 }
