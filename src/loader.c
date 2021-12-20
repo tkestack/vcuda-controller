@@ -969,6 +969,7 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
   /**
    * if cgroup is systemd, cgroup pattern should be like
    * /kubepods.slice/kubepods-besteffort.slice/kubepods-besteffort-pod27882189_b4d9_11e9_b287_ec0d9ae89a20.slice/docker-4aa615892ab2a014d52178bdf3da1c4a45c8ddfb5171dd6e39dc910f96693e14.scope
+   * /kubepods.slice/kubepods-pod019c1fe8_0d92_4aa0_b61c_4df58bdde71c.slice/cri-containerd-9e073649debeec6d511391c9ec7627ee67ce3a3fb508b0fa0437a97f8e58ba98.scope
    */
   if ((prune_pos = strstr(container_id, ".scope"))) {
     is_systemd = 1;
@@ -994,11 +995,25 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
    * remove unnecessary chars from $container_id and $pod_uid
    */
   if (is_systemd) {
-    prune_pos = strstr(container_id, "-");
+    /**
+     * For this kind of cgroup path, we need to find the last appearance of
+     * slash
+     * /kubepods.slice/kubepods-pod019c1fe8_0d92_4aa0_b61c_4df58bdde71c.slice/cri-containerd-9e073649debeec6d511391c9ec7627ee67ce3a3fb508b0fa0437a97f8e58ba98.scope
+     */
+    prune_pos = NULL;
+    token = container_id;
+    while (*token) {
+      if (*token == '-') {
+        prune_pos = token;
+      }
+      ++token;
+    }
+
     if (!prune_pos) {
       LOGGER(4, "no - prefix");
       goto DONE;
     }
+
     memmove(container_id, prune_pos + 1, strlen(container_id));
 
     prune_pos = strstr(pod_uid, "-pod");
