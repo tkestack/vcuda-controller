@@ -2808,12 +2808,6 @@ CUresult cuFlushGPUDirectRDMAWrites(CUflushGPUDirectRDMAWritesTarget target,
                          scope);
 }
 
-CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
-                          cuuint64_t flags) {
-  return CUDA_ENTRY_CALL(cuda_library_entry, cuGetProcAddress, symbol, pfn,
-                         cudaVersion, flags);
-}
-
 CUresult cuGraphAddMemAllocNode(CUgraphNode *phGraphNode, CUgraph hGraph,
                                 const CUgraphNode *dependencies,
                                 size_t numDependencies,

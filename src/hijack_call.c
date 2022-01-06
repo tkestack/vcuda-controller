@@ -89,6 +89,94 @@ static const char *cuda_error(CUresult, const char **);
 
 static int int_match(const void *, const void *);
 
+/** export function definition */
+CUresult cuDriverGetVersion(int *driverVersion);
+CUresult cuInit(unsigned int flag);
+CUresult cuMemAllocManaged(CUdeviceptr *dptr, size_t bytesize,
+                           unsigned int flags);
+CUresult cuMemAlloc_v2(CUdeviceptr *dptr, size_t bytesize);
+CUresult cuMemAlloc(CUdeviceptr *dptr, size_t bytesize);
+CUresult cuMemAllocPitch_v2(CUdeviceptr *dptr, size_t *pPitch,
+                            size_t WidthInBytes, size_t Height,
+                            unsigned int ElementSizeBytes);
+CUresult cuMemAllocPitch(CUdeviceptr *dptr, size_t *pPitch, size_t WidthInBytes,
+                         size_t Height, unsigned int ElementSizeBytes);
+CUresult cuArrayCreate_v2(CUarray *pHandle,
+                          const CUDA_ARRAY_DESCRIPTOR *pAllocateArray);
+CUresult cuArrayCreate(CUarray *pHandle,
+                       const CUDA_ARRAY_DESCRIPTOR *pAllocateArray);
+CUresult cuArray3DCreate_v2(CUarray *pHandle,
+                            const CUDA_ARRAY3D_DESCRIPTOR *pAllocateArray);
+CUresult cuArray3DCreate(CUarray *pHandle,
+                         const CUDA_ARRAY3D_DESCRIPTOR *pAllocateArray);
+CUresult
+cuMipmappedArrayCreate(CUmipmappedArray *pHandle,
+                       const CUDA_ARRAY3D_DESCRIPTOR *pMipmappedArrayDesc,
+                       unsigned int numMipmapLevels);
+CUresult cuDeviceTotalMem_v2(size_t *bytes, CUdevice dev);
+CUresult cuDeviceTotalMem(size_t *bytes, CUdevice dev);
+CUresult cuMemGetInfo_v2(size_t *free, size_t *total);
+CUresult cuMemGetInfo(size_t *free, size_t *total);
+CUresult cuLaunchKernel_ptsz(CUfunction f, unsigned int gridDimX,
+                             unsigned int gridDimY, unsigned int gridDimZ,
+                             unsigned int blockDimX, unsigned int blockDimY,
+                             unsigned int blockDimZ,
+                             unsigned int sharedMemBytes, CUstream hStream,
+                             void **kernelParams, void **extra);
+CUresult cuLaunchKernel(CUfunction f, unsigned int gridDimX,
+                        unsigned int gridDimY, unsigned int gridDimZ,
+                        unsigned int blockDimX, unsigned int blockDimY,
+                        unsigned int blockDimZ, unsigned int sharedMemBytes,
+                        CUstream hStream, void **kernelParams, void **extra);
+CUresult cuLaunch(CUfunction f);
+CUresult cuLaunchCooperativeKernel_ptsz(
+    CUfunction f, unsigned int gridDimX, unsigned int gridDimY,
+    unsigned int gridDimZ, unsigned int blockDimX, unsigned int blockDimY,
+    unsigned int blockDimZ, unsigned int sharedMemBytes, CUstream hStream,
+    void **kernelParams);
+CUresult cuLaunchCooperativeKernel(CUfunction f, unsigned int gridDimX,
+                                   unsigned int gridDimY, unsigned int gridDimZ,
+                                   unsigned int blockDimX,
+                                   unsigned int blockDimY,
+                                   unsigned int blockDimZ,
+                                   unsigned int sharedMemBytes,
+                                   CUstream hStream, void **kernelParams);
+CUresult cuLaunchGrid(CUfunction f, int grid_width, int grid_height);
+CUresult cuLaunchGridAsync(CUfunction f, int grid_width, int grid_height,
+                           CUstream hStream);
+CUresult cuFuncSetBlockShape(CUfunction hfunc, int x, int y, int z);
+
+entry_t cuda_hooks_entry[] = {
+    {.name = "cuDriverGetVersion", .fn_ptr = cuDriverGetVersion},
+    {.name = "cuInit", .fn_ptr = cuInit},
+    {.name = "cuMemAllocManaged", .fn_ptr = cuMemAllocManaged},
+    {.name = "cuMemAlloc_v2", .fn_ptr = cuMemAlloc_v2},
+    {.name = "cuMemAlloc", .fn_ptr = cuMemAlloc},
+    {.name = "cuMemAllocPitch_v2", .fn_ptr = cuMemAllocPitch_v2},
+    {.name = "cuMemAllocPitch", .fn_ptr = cuMemAllocPitch},
+    {.name = "cuArrayCreate_v2", .fn_ptr = cuArrayCreate_v2},
+    {.name = "cuArrayCreate", .fn_ptr = cuArrayCreate},
+    {.name = "cuArray3DCreate_v2", .fn_ptr = cuArray3DCreate_v2},
+    {.name = "cuArray3DCreate", .fn_ptr = cuArray3DCreate},
+    {.name = "cuMipmappedArrayCreate", .fn_ptr = cuMipmappedArrayCreate},
+    {.name = "cuDeviceTotalMem_v2", .fn_ptr = cuDeviceTotalMem_v2},
+    {.name = "cuDeviceTotalMem", .fn_ptr = cuDeviceTotalMem},
+    {.name = "cuMemGetInfo_v2", .fn_ptr = cuMemGetInfo_v2},
+    {.name = "cuMemGetInfo", .fn_ptr = cuMemGetInfo},
+    {.name = "cuLaunchKernel_ptsz", .fn_ptr = cuLaunchKernel_ptsz},
+    {.name = "cuLaunchKernel", .fn_ptr = cuLaunchKernel},
+    {.name = "cuLaunch", .fn_ptr = cuLaunch},
+    {.name = "cuLaunchCooperativeKernel_ptsz",
+     .fn_ptr = cuLaunchCooperativeKernel_ptsz},
+    {.name = "cuLaunchCooperativeKernel", .fn_ptr = cuLaunchCooperativeKernel},
+    {.name = "cuLaunchGrid", .fn_ptr = cuLaunchGrid},
+    {.name = "cuLaunchGridAsync", .fn_ptr = cuLaunchGridAsync},
+    {.name = "cuFuncSetBlockShape", .fn_ptr = cuFuncSetBlockShape},
+};
+
+const int cuda_hook_nums =
+    sizeof(cuda_hooks_entry) / sizeof(cuda_hooks_entry[0]);
+
 /** dynamic rate control */
 typedef struct {
   int user_current;
@@ -100,8 +188,8 @@ typedef struct {
 
 /** helper function */
 int int_match(const void *a, const void *b) {
-  const int *ra = (const int *) a;
-  const int *rb = (const int *) b;
+  const int *ra = (const int *)a;
+  const int *rb = (const int *)b;
 
   if (*ra < *rb) {
     return -1;
@@ -168,7 +256,7 @@ static void rate_limiter(int grids, int blocks) {
   LOGGER(5, "launch kernel %d, curr core: %d", kernel_size, g_cur_cuda_cores);
   if (g_vcuda_config.enable) {
     do {
-CHECK:
+    CHECK:
       before_cuda_cores = g_cur_cuda_cores;
       LOGGER(8, "current core: %d", g_cur_cuda_cores);
       if (before_cuda_cores < 0) {
@@ -192,7 +280,8 @@ int delta(int up_limit, int user_current, int share) {
   }
 
   if (unlikely(increment < 0)) {
-    LOGGER(3, "overflow: %d, current sm: %d, thread_per_sm: %d, diff: %d", increment, g_sm_num, g_max_thread_per_sm, utilization_diff);
+    LOGGER(3, "overflow: %d, current sm: %d, thread_per_sm: %d, diff: %d",
+           increment, g_sm_num, g_max_thread_per_sm, utilization_diff);
   }
 
   if (user_current <= up_limit) {
@@ -224,7 +313,7 @@ static void *utilization_watcher(void *arg UNUSED) {
   while (1) {
     nanosleep(&g_wait, NULL);
     do {
-      atomic_action(pid_path, get_used_gpu_utilization, (void *) &top_result);
+      atomic_action(pid_path, get_used_gpu_utilization, (void *)&top_result);
     } while (!top_result.valid);
 
     sys_free = MAX_UTILIZATION - top_result.sys_current;
@@ -265,9 +354,9 @@ static void *utilization_watcher(void *arg UNUSED) {
         if (i % CHANGE_LIMIT_INTERVAL == 0) {
           if (avg_sys_free * 2 / CHANGE_LIMIT_INTERVAL > USAGE_THRESHOLD) {
             up_limit = up_limit + g_vcuda_config.utilization / 10 >
-                       g_vcuda_config.limit
-                       ? g_vcuda_config.limit
-                       : up_limit + g_vcuda_config.utilization / 10;
+                               g_vcuda_config.limit
+                           ? g_vcuda_config.limit
+                           : up_limit + g_vcuda_config.utilization / 10;
           }
           i = 0;
         }
@@ -301,7 +390,7 @@ static void get_used_gpu_utilization(int fd, void *arg) {
   unsigned int running_processes = MAX_PIDS;
   nvmlProcessInfo_t pids_on_device[MAX_PIDS];
   nvmlDevice_t dev;
-  utilization_t *top_result = (utilization_t *) arg;
+  utilization_t *top_result = (utilization_t *)arg;
   nvmlReturn_t ret;
   struct timeval cur;
   size_t microsec;
@@ -350,7 +439,7 @@ static void get_used_gpu_utilization(int fd, void *arg) {
 
       LOGGER(8, "try to find %d from pid tables", processes_sample[i].pid);
       if (likely(bsearch(&processes_sample[i].pid, g_pids_table,
-                         (size_t) g_pids_table_size, sizeof(int), int_match))) {
+                         (size_t)g_pids_table_size, sizeof(int), int_match))) {
         top_result->user_current += GET_VALID_VALUE(processes_sample[i].smUtil);
 
         codec_util = GET_VALID_VALUE(processes_sample[i].encUtil) +
@@ -370,7 +459,7 @@ static void load_pids_table(int fd, void *arg UNUSED) {
   int i = 0;
 
   for (item = 0; item < MAX_PIDS; item++) {
-    rsize = (int) read(fd, g_pids_table + item, sizeof(int));
+    rsize = (int)read(fd, g_pids_table + item, sizeof(int));
     if (unlikely(rsize != sizeof(int))) {
       break;
     }
@@ -423,7 +512,7 @@ static void get_used_gpu_memory(int fd, void *arg) {
   }
 
   for (i = 0; i < size_on_device; i++) {
-    if (bsearch(&pids_on_device[i].pid, g_pids_table, (size_t) g_pids_table_size,
+    if (bsearch(&pids_on_device[i].pid, g_pids_table, (size_t)g_pids_table_size,
                 sizeof(int), int_match)) {
       LOGGER(4, "%d use memory: %lld", pids_on_device[i].pid,
              pids_on_device[i].usedGpuMemory);
@@ -444,14 +533,14 @@ static void register_to_remote() {
                         &nvml_dev);
   if (unlikely(ret)) {
     LOGGER(FATAL, "can't find device 0, error %s",
-           nvml_error((nvmlReturn_t) ret));
+           nvml_error((nvmlReturn_t)ret));
   }
 
   ret = NVML_ENTRY_CALL(nvml_library_entry, nvmlDeviceGetPciInfo, nvml_dev,
                         &pci_info);
   if (unlikely(ret)) {
     LOGGER(FATAL, "can't find device 0, error %s",
-           nvml_error((nvmlReturn_t) ret));
+           nvml_error((nvmlReturn_t)ret));
   }
 
   strncpy(g_vcuda_config.bus_id, pci_info.busId,
@@ -468,14 +557,14 @@ static void initialization() {
   ret = CUDA_ENTRY_CALL(cuda_library_entry, cuInit, 0);
   if (unlikely(ret)) {
     LOGGER(FATAL, "cuInit error %s",
-           cuda_error((CUresult) ret, &cuda_err_string));
+           cuda_error((CUresult)ret, &cuda_err_string));
   }
 
   ret = CUDA_ENTRY_CALL(cuda_library_entry, cuDeviceGetAttribute, &g_sm_num,
                         CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT, 0);
   if (unlikely(ret)) {
     LOGGER(FATAL, "can't get processor number, error %s",
-           cuda_error((CUresult) ret, &cuda_err_string));
+           cuda_error((CUresult)ret, &cuda_err_string));
   }
 
   ret = CUDA_ENTRY_CALL(cuda_library_entry, cuDeviceGetAttribute,
@@ -483,7 +572,7 @@ static void initialization() {
                         CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR, 0);
   if (unlikely(ret)) {
     LOGGER(FATAL, "can't get max thread per processor, error %s",
-           cuda_error((CUresult) ret, &cuda_err_string));
+           cuda_error((CUresult)ret, &cuda_err_string));
   }
 
   g_total_cuda_cores = g_max_thread_per_sm * g_sm_num * FACTOR;
@@ -536,7 +625,7 @@ CUresult cuMemAllocManaged(CUdeviceptr *dptr, size_t bytesize,
   CUresult ret;
 
   if (g_vcuda_config.enable) {
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     if (unlikely(used + request_size > g_vcuda_config.gpu_memory)) {
       ret = CUDA_ERROR_OUT_OF_MEMORY;
@@ -556,7 +645,7 @@ CUresult cuMemAlloc_v2(CUdeviceptr *dptr, size_t bytesize) {
   CUresult ret;
 
   if (g_vcuda_config.enable) {
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     if (unlikely(used + request_size > g_vcuda_config.gpu_memory)) {
       ret = CUDA_ERROR_OUT_OF_MEMORY;
@@ -575,7 +664,7 @@ CUresult cuMemAlloc(CUdeviceptr *dptr, size_t bytesize) {
   CUresult ret;
 
   if (g_vcuda_config.enable) {
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     if (unlikely(used + request_size > g_vcuda_config.gpu_memory)) {
       ret = CUDA_ERROR_OUT_OF_MEMORY;
@@ -596,7 +685,7 @@ CUresult cuMemAllocPitch_v2(CUdeviceptr *dptr, size_t *pPitch,
   CUresult ret;
 
   if (g_vcuda_config.enable) {
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     if (unlikely(used + request_size > g_vcuda_config.gpu_memory)) {
       ret = CUDA_ERROR_OUT_OF_MEMORY;
@@ -617,7 +706,7 @@ CUresult cuMemAllocPitch(CUdeviceptr *dptr, size_t *pPitch, size_t WidthInBytes,
   CUresult ret;
 
   if (g_vcuda_config.enable) {
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     if (unlikely(used + request_size > g_vcuda_config.gpu_memory)) {
       ret = CUDA_ERROR_OUT_OF_MEMORY;
@@ -635,29 +724,29 @@ static size_t get_array_base_size(int format) {
   size_t base_size = 0;
 
   switch (format) {
-    case CU_AD_FORMAT_UNSIGNED_INT8:
-    case CU_AD_FORMAT_SIGNED_INT8:
-      base_size = 8;
-      break;
-    case CU_AD_FORMAT_UNSIGNED_INT16:
-    case CU_AD_FORMAT_SIGNED_INT16:
-    case CU_AD_FORMAT_HALF:
-      base_size = 16;
-      break;
-    case CU_AD_FORMAT_UNSIGNED_INT32:
-    case CU_AD_FORMAT_SIGNED_INT32:
-    case CU_AD_FORMAT_FLOAT:
-      base_size = 32;
-      break;
-    default:
-      base_size = 32;
+  case CU_AD_FORMAT_UNSIGNED_INT8:
+  case CU_AD_FORMAT_SIGNED_INT8:
+    base_size = 8;
+    break;
+  case CU_AD_FORMAT_UNSIGNED_INT16:
+  case CU_AD_FORMAT_SIGNED_INT16:
+  case CU_AD_FORMAT_HALF:
+    base_size = 16;
+    break;
+  case CU_AD_FORMAT_UNSIGNED_INT32:
+  case CU_AD_FORMAT_SIGNED_INT32:
+  case CU_AD_FORMAT_FLOAT:
+    base_size = 32;
+    break;
+  default:
+    base_size = 32;
   }
 
   return base_size;
 }
 
-static CUresult cuArrayCreate_helper(
-    const CUDA_ARRAY_DESCRIPTOR *pAllocateArray) {
+static CUresult
+cuArrayCreate_helper(const CUDA_ARRAY_DESCRIPTOR *pAllocateArray) {
   size_t used = 0;
   size_t base_size = 0;
   size_t request_size = 0;
@@ -668,7 +757,7 @@ static CUresult cuArrayCreate_helper(
     request_size = base_size * pAllocateArray->NumChannels *
                    pAllocateArray->Height * pAllocateArray->Width;
 
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     if (unlikely(used + request_size > g_vcuda_config.gpu_memory)) {
       ret = CUDA_ERROR_OUT_OF_MEMORY;
@@ -710,8 +799,8 @@ DONE:
   return ret;
 }
 
-static CUresult cuArray3DCreate_helper(
-    const CUDA_ARRAY3D_DESCRIPTOR *pAllocateArray) {
+static CUresult
+cuArray3DCreate_helper(const CUDA_ARRAY3D_DESCRIPTOR *pAllocateArray) {
   size_t used = 0;
   size_t base_size = 0;
   size_t request_size = 0;
@@ -722,7 +811,7 @@ static CUresult cuArray3DCreate_helper(
     request_size = base_size * pAllocateArray->NumChannels *
                    pAllocateArray->Height * pAllocateArray->Width;
 
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     if (unlikely(used + request_size > g_vcuda_config.gpu_memory)) {
       ret = CUDA_ERROR_OUT_OF_MEMORY;
@@ -763,10 +852,10 @@ DONE:
   return ret;
 }
 
-CUresult cuMipmappedArrayCreate(
-    CUmipmappedArray *pHandle,
-    const CUDA_ARRAY3D_DESCRIPTOR *pMipmappedArrayDesc,
-    unsigned int numMipmapLevels) {
+CUresult
+cuMipmappedArrayCreate(CUmipmappedArray *pHandle,
+                       const CUDA_ARRAY3D_DESCRIPTOR *pMipmappedArrayDesc,
+                       unsigned int numMipmapLevels) {
   size_t used = 0;
   size_t base_size = 0;
   size_t request_size = 0;
@@ -778,7 +867,7 @@ CUresult cuMipmappedArrayCreate(
                    pMipmappedArrayDesc->Height * pMipmappedArrayDesc->Width *
                    pMipmappedArrayDesc->Depth;
 
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     if (unlikely(used + request_size > g_vcuda_config.gpu_memory)) {
       ret = CUDA_ERROR_OUT_OF_MEMORY;
@@ -816,7 +905,7 @@ CUresult cuMemGetInfo_v2(size_t *free, size_t *total) {
   size_t used = 0;
 
   if (g_vcuda_config.enable) {
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     *total = g_vcuda_config.gpu_memory;
     *free =
@@ -832,7 +921,7 @@ CUresult cuMemGetInfo(size_t *free, size_t *total) {
   size_t used = 0;
 
   if (g_vcuda_config.enable) {
-    atomic_action(pid_path, get_used_gpu_memory, (void *) &used);
+    atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
     *total = g_vcuda_config.gpu_memory;
     *free =
@@ -931,4 +1020,24 @@ CUresult cuFuncSetBlockShape(CUfunction hfunc, int x, int y, int z) {
   }
   return CUDA_ENTRY_CALL(cuda_library_entry, cuFuncSetBlockShape, hfunc, x, y,
                          z);
+}
+
+CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
+                          cuuint64_t flags) {
+  CUresult ret;
+  int i;
+
+  ret = CUDA_ENTRY_CALL(cuda_library_entry, cuGetProcAddress, symbol, pfn,
+                        cudaVersion, flags);
+  if (ret == CUDA_SUCCESS) {
+    for (i = 0; i < cuda_hook_nums; i++) {
+      if (!strcmp(symbol, cuda_hooks_entry[i].name)) {
+        LOGGER(5, "Match hook %s", symbol);
+        *pfn = cuda_hooks_entry[i].fn_ptr;
+        break;
+      }
+    }
+  }
+
+  return ret;
 }
