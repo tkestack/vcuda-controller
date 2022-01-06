@@ -24,7 +24,7 @@ function build_img() {
     cp ${ROOT}/Dockerfile ${ROOT}/build
     (
       cd ${ROOT}/build
-      docker build --network=host --build-arg version=${version} --build-arg commit=${commit} -t ${IMAGE_FILE} .
+      docker build ${BUILD_FLAGS:-} --build-arg version=${version} --build-arg commit=${commit} -t ${IMAGE_FILE} .
     )
 }
 
