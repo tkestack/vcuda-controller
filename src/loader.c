@@ -947,8 +947,8 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
   char *token = NULL, *last_ptr = NULL, *last_second = NULL;
   char *cgroup_ptr = NULL;
   char buffer[4096];
-  int is_systemd = 0;
   char *prune_pos = NULL;
+  int id_size = 0;
 
   cgroup_fd = fopen(pid_cgroup, "r");
   if (unlikely(!cgroup_fd)) {
@@ -969,11 +969,9 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
     buffer[strlen(buffer) - 1] = '\0';
 
     last_ptr = NULL;
-    token = buffer;
-    for (token = strtok_r(token, ":", &last_ptr); token;
-         token = NULL, token = strtok_r(token, ":", &last_ptr)) {
+    for (token = strtok_r(buffer, ":", &last_ptr); token; token = strtok_r(NULL, ":", &last_ptr)) {
       if (!strcmp(token, "memory")) {
-        cgroup_ptr = strtok_r(NULL, ":", &last_ptr);
+        cgroup_ptr = strtok_r(NULL, "\n", &last_ptr);
         break;
       }
     }
@@ -987,16 +985,28 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
     LOGGER(4, "can't find memory cgroup from %s", pid_cgroup);
     goto DONE;
   }
+  LOGGER(4, "get cgroup path %s", cgroup_ptr);
+
 
   /**
    * find container id
+   *
+   * if cgroup is cgroupfs, cgroup pattern should be like
+   *
+   * docker
+   * /kubepods/besteffort/pod27882189_b4d9_11e9_b287_ec0d9ae89a20/docker-4aa615892ab2a014d52178bdf3da1c4a45c8ddfb5171dd6e39dc910f96693e14
+   *
+   * containerd
+   * /system.slice/containerd.service/kubepods-besteffort-pod019c1fe8_0d92_4aa0_b61c_4df58bdde71c.slice:cri-containerd:9e073649debeec6d511391c9ec7627ee67ce3a3fb508b0fa0437a97f8e58ba98
    */
   last_ptr = NULL;
   last_second = NULL;
   token = cgroup_ptr;
   while (*token) {
-    if (*token == '/') {
-      last_second = last_ptr;
+    if (*token == '/' || *token == ':') {
+      if (last_ptr && *last_ptr == '/') {
+        last_second = last_ptr;
+      }
       last_ptr = token;
     }
     ++token;
@@ -1006,8 +1016,18 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
     goto DONE;
   }
 
-  strncpy(container_id, last_ptr + 1, size);
-  container_id[size - 1] = '\0';
+  token = last_ptr;
+  prune_pos = token;
+  while (*token) {
+    if (*token == '-' || *token == ':') {
+      prune_pos = token;
+    }
+    ++token;
+  }
+  // NOT minus 1 for the tailing `\0`
+  id_size = token - prune_pos;
+  strncpy(container_id, prune_pos + 1, id_size);
+  container_id[id_size - 1] = '\0';
 
   /**
    * if cgroup is systemd, cgroup pattern should be like
@@ -1015,71 +1035,50 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
    * /kubepods.slice/kubepods-pod019c1fe8_0d92_4aa0_b61c_4df58bdde71c.slice/cri-containerd-9e073649debeec6d511391c9ec7627ee67ce3a3fb508b0fa0437a97f8e58ba98.scope
    */
   if ((prune_pos = strstr(container_id, ".scope"))) {
-    is_systemd = 1;
     *prune_pos = '\0';
   }
+  LOGGER(4, "get container id %s", container_id);
 
   /**
    * find pod uid
    */
-  *last_ptr = '\0';
   if (!last_second) {
     goto DONE;
   }
+  id_size = last_ptr - last_second;
+  strncpy(pod_uid, last_second + 1, id_size);
+  pod_uid[id_size - 1] = '\0';
 
-  strncpy(pod_uid, last_second, size);
-  pod_uid[size - 1] = '\0';
+  /*
+   * remove Pod UID prefix
+   * kubepods-besteffort-pod or pod
+   * `po` chars will never appear in Pod UID
+   * it is ok to search `pod` directly
+   */
+  while ((prune_pos = strstr(pod_uid, "pod"))) {
+    prune_pos += strlen("pod");
+    memmove(pod_uid, prune_pos, strlen(prune_pos));
+  }
 
-  if (is_systemd && (prune_pos = strstr(pod_uid, ".slice"))) {
+  if ((prune_pos = strstr(pod_uid, ".slice"))) {
+    *prune_pos = '\0';
+  }
+  // NOT necessary currently, just make sure there is no other suffix for Pod UID
+  if ((prune_pos = strstr(pod_uid, ":"))) {
     *prune_pos = '\0';
   }
 
-  /**
-   * remove unnecessary chars from $container_id and $pod_uid
-   */
-  if (is_systemd) {
-    /**
-     * For this kind of cgroup path, we need to find the last appearance of
-     * slash
-     * /kubepods.slice/kubepods-pod019c1fe8_0d92_4aa0_b61c_4df58bdde71c.slice/cri-containerd-9e073649debeec6d511391c9ec7627ee67ce3a3fb508b0fa0437a97f8e58ba98.scope
-     */
-    prune_pos = NULL;
-    token = container_id;
-    while (*token) {
-      if (*token == '-') {
-        prune_pos = token;
-      }
-      ++token;
+  prune_pos = pod_uid;
+  while (prune_pos && *prune_pos) {
+    if (*prune_pos == '_') {
+      *prune_pos = '-';
     }
-
-    if (!prune_pos) {
-      LOGGER(4, "no - prefix");
-      goto DONE;
-    }
-
-    memmove(container_id, prune_pos + 1, strlen(container_id));
-
-    prune_pos = strstr(pod_uid, "-pod");
-    if (!prune_pos) {
-      LOGGER(4, "no pod string");
-      goto DONE;
-    }
-    prune_pos += strlen("-pod");
-    memmove(pod_uid, prune_pos, strlen(prune_pos));
-    pod_uid[strlen(prune_pos)] = '\0';
-    prune_pos = pod_uid;
-    while (*prune_pos) {
-      if (*prune_pos == '_') {
-        *prune_pos = '-';
-      }
-      ++prune_pos;
-    }
-  } else {
-    memmove(pod_uid, pod_uid + strlen("/pod"), strlen(pod_uid));
+    ++prune_pos;
   }
+  LOGGER(4, "get pod uid %s", pod_uid);
 
   ret = 0;
-DONE:
+ DONE:
   if (cgroup_fd) {
     fclose(cgroup_fd);
   }
