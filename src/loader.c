@@ -1057,7 +1057,8 @@ int get_cgroup_data(const char *pid_cgroup, char *pod_uid, char *container_id,
    */
   while ((prune_pos = strstr(pod_uid, "pod"))) {
     prune_pos += strlen("pod");
-    memmove(pod_uid, prune_pos, strlen(prune_pos));
+    // +1 for the tailing `\0`
+    memmove(pod_uid, prune_pos, strlen(prune_pos)+1);
   }
 
   if ((prune_pos = strstr(pod_uid, ".slice"))) {
