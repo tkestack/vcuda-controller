@@ -1547,7 +1547,7 @@ nvmlGpuInstanceCreateComputeInstance(nvmlGpuInstance_t gpuInstance,
 }
 
 nvmlReturn_t nvmlGpuInstanceDestroy(nvmlGpuInstance_t gpuInstance) {
-  return NVML_ENTRY_CALL(cuda_library_entry, nvmlGpuInstanceDestroy,
+  return NVML_ENTRY_CALL(nvml_library_entry, nvmlGpuInstanceDestroy,
                          gpuInstance);
 }
 
