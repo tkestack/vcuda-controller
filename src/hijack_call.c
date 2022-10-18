@@ -809,7 +809,8 @@ cuArray3DCreate_helper(const CUDA_ARRAY3D_DESCRIPTOR *pAllocateArray) {
   if (g_vcuda_config.enable) {
     base_size = get_array_base_size(pAllocateArray->Format);
     request_size = base_size * pAllocateArray->NumChannels *
-                   pAllocateArray->Height * pAllocateArray->Width;
+                   pAllocateArray->Height * pAllocateArray->Width *
+                   pAllocateArray->Depth;
 
     atomic_action(pid_path, get_used_gpu_memory, (void *)&used);
 
