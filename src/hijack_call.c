@@ -89,6 +89,8 @@ static const char *cuda_error(CUresult, const char **);
 
 static int int_match(const void *, const void *);
 
+static int delta(int up_limit, int user_current, int share);
+
 /** export function definition */
 CUresult cuDriverGetVersion(int *driverVersion);
 CUresult cuInit(unsigned int flag);
@@ -268,7 +270,7 @@ static void rate_limiter(int grids, int blocks) {
   }
 }
 
-int delta(int up_limit, int user_current, int share) {
+static int delta(int up_limit, int user_current, int share) {
   int utilization_diff =
       abs(up_limit - user_current) < 5 ? 5 : abs(up_limit - user_current);
   int increment =
