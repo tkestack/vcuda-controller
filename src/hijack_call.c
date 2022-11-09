@@ -89,7 +89,7 @@ static const char *cuda_error(CUresult, const char **);
 
 static int int_match(const void *, const void *);
 
-static int delta(int up_limit, int user_current, int share);
+static int delta(int, int, int);
 
 /** export function definition */
 CUresult cuDriverGetVersion(int *driverVersion);
