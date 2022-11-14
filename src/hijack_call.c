@@ -620,6 +620,32 @@ DONE:
   return ret;
 }
 
+CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
+                          cuuint64_t flags) {
+  CUresult ret;
+  int i;
+
+  load_necessary_data();
+  if (!is_custom_config_path()) {
+    pthread_once(&g_register_set, register_to_remote);
+  }
+  pthread_once(&g_init_set, initialization);
+
+  ret = CUDA_ENTRY_CALL(cuda_library_entry, cuGetProcAddress, symbol, pfn,
+                        cudaVersion, flags);
+  if (ret == CUDA_SUCCESS) {
+    for (i = 0; i < cuda_hook_nums; i++) {
+      if (!strcmp(symbol, cuda_hooks_entry[i].name)) {
+        LOGGER(5, "Match hook %s", symbol);
+        *pfn = cuda_hooks_entry[i].fn_ptr;
+        break;
+      }
+    }
+  }
+
+  return ret;
+}
+
 CUresult cuMemAllocManaged(CUdeviceptr *dptr, size_t bytesize,
                            unsigned int flags) {
   size_t used = 0;
@@ -1023,24 +1049,4 @@ CUresult cuFuncSetBlockShape(CUfunction hfunc, int x, int y, int z) {
   }
   return CUDA_ENTRY_CALL(cuda_library_entry, cuFuncSetBlockShape, hfunc, x, y,
                          z);
-}
-
-CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
-                          cuuint64_t flags) {
-  CUresult ret;
-  int i;
-
-  ret = CUDA_ENTRY_CALL(cuda_library_entry, cuGetProcAddress, symbol, pfn,
-                        cudaVersion, flags);
-  if (ret == CUDA_SUCCESS) {
-    for (i = 0; i < cuda_hook_nums; i++) {
-      if (!strcmp(symbol, cuda_hooks_entry[i].name)) {
-        LOGGER(5, "Match hook %s", symbol);
-        *pfn = cuda_hooks_entry[i].fn_ptr;
-        break;
-      }
-    }
-  }
-
-  return ret;
 }
