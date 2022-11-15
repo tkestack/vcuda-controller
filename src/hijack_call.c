@@ -94,6 +94,8 @@ static int delta(int, int, int);
 /** export function definition */
 CUresult cuDriverGetVersion(int *driverVersion);
 CUresult cuInit(unsigned int flag);
+CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
+                          cuuint64_t flags); 
 CUresult cuMemAllocManaged(CUdeviceptr *dptr, size_t bytesize,
                            unsigned int flags);
 CUresult cuMemAlloc_v2(CUdeviceptr *dptr, size_t bytesize);
@@ -151,6 +153,7 @@ CUresult cuFuncSetBlockShape(CUfunction hfunc, int x, int y, int z);
 entry_t cuda_hooks_entry[] = {
     {.name = "cuDriverGetVersion", .fn_ptr = cuDriverGetVersion},
     {.name = "cuInit", .fn_ptr = cuInit},
+    {.name = "cuGetProcAddress", .fn_ptr = cuGetProcAddress},
     {.name = "cuMemAllocManaged", .fn_ptr = cuMemAllocManaged},
     {.name = "cuMemAlloc_v2", .fn_ptr = cuMemAlloc_v2},
     {.name = "cuMemAlloc", .fn_ptr = cuMemAlloc},
