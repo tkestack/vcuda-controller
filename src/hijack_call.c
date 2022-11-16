@@ -150,33 +150,32 @@ CUresult cuLaunchGridAsync(CUfunction f, int grid_width, int grid_height,
                            CUstream hStream);
 CUresult cuFuncSetBlockShape(CUfunction hfunc, int x, int y, int z);
 
-entry_t cuda_hooks_entry[] = {
-    {.name = "cuDriverGetVersion", .fn_ptr = cuDriverGetVersion},
-    {.name = "cuInit", .fn_ptr = cuInit},
-    {.name = "cuGetProcAddress", .fn_ptr = cuGetProcAddress},
-    {.name = "cuMemAllocManaged", .fn_ptr = cuMemAllocManaged},
-    {.name = "cuMemAlloc_v2", .fn_ptr = cuMemAlloc_v2},
-    {.name = "cuMemAlloc", .fn_ptr = cuMemAlloc},
-    {.name = "cuMemAllocPitch_v2", .fn_ptr = cuMemAllocPitch_v2},
-    {.name = "cuMemAllocPitch", .fn_ptr = cuMemAllocPitch},
-    {.name = "cuArrayCreate_v2", .fn_ptr = cuArrayCreate_v2},
-    {.name = "cuArrayCreate", .fn_ptr = cuArrayCreate},
-    {.name = "cuArray3DCreate_v2", .fn_ptr = cuArray3DCreate_v2},
-    {.name = "cuArray3DCreate", .fn_ptr = cuArray3DCreate},
-    {.name = "cuMipmappedArrayCreate", .fn_ptr = cuMipmappedArrayCreate},
-    {.name = "cuDeviceTotalMem_v2", .fn_ptr = cuDeviceTotalMem_v2},
-    {.name = "cuDeviceTotalMem", .fn_ptr = cuDeviceTotalMem},
-    {.name = "cuMemGetInfo_v2", .fn_ptr = cuMemGetInfo_v2},
-    {.name = "cuMemGetInfo", .fn_ptr = cuMemGetInfo},
-    {.name = "cuLaunchKernel_ptsz", .fn_ptr = cuLaunchKernel_ptsz},
-    {.name = "cuLaunchKernel", .fn_ptr = cuLaunchKernel},
-    {.name = "cuLaunch", .fn_ptr = cuLaunch},
-    {.name = "cuLaunchCooperativeKernel_ptsz",
-     .fn_ptr = cuLaunchCooperativeKernel_ptsz},
-    {.name = "cuLaunchCooperativeKernel", .fn_ptr = cuLaunchCooperativeKernel},
-    {.name = "cuLaunchGrid", .fn_ptr = cuLaunchGrid},
-    {.name = "cuLaunchGridAsync", .fn_ptr = cuLaunchGridAsync},
-    {.name = "cuFuncSetBlockShape", .fn_ptr = cuFuncSetBlockShape},
+hook_entry_t cuda_hooks_entry[] = {
+    {.name = "cuDriverGetVersion", .fn_ptr = cuDriverGetVersion, .library_index=CUDA_ENTRY_ENUM(cuDriverGetVersion)},
+    {.name = "cuInit", .fn_ptr = cuInit, .library_index=CUDA_ENTRY_ENUM(cuInit)},
+    {.name = "cuGetProcAddress", .fn_ptr = cuGetProcAddress, .library_index=CUDA_ENTRY_ENUM(cuGetProcAddress)},
+    {.name = "cuMemAllocManaged", .fn_ptr = cuMemAllocManaged, .library_index=CUDA_ENTRY_ENUM(cuMemAllocManaged)},
+    {.name = "cuMemAlloc_v2", .fn_ptr = cuMemAlloc_v2, .library_index=CUDA_ENTRY_ENUM(cuMemAlloc_v2)},
+    {.name = "cuMemAlloc", .fn_ptr = cuMemAlloc, .library_index=CUDA_ENTRY_ENUM(cuMemAlloc)},
+    {.name = "cuMemAllocPitch_v2", .fn_ptr = cuMemAllocPitch_v2, .library_index=CUDA_ENTRY_ENUM(cuMemAllocPitch_v2)},
+    {.name = "cuMemAllocPitch", .fn_ptr = cuMemAllocPitch, .library_index=CUDA_ENTRY_ENUM(cuMemAllocPitch)},
+    {.name = "cuArrayCreate_v2", .fn_ptr = cuArrayCreate_v2, .library_index=CUDA_ENTRY_ENUM(cuArrayCreate_v2)},
+    {.name = "cuArrayCreate", .fn_ptr = cuArrayCreate, .library_index=CUDA_ENTRY_ENUM(cuArrayCreate)},
+    {.name = "cuArray3DCreate_v2", .fn_ptr = cuArray3DCreate_v2, .library_index=CUDA_ENTRY_ENUM(cuArray3DCreate_v2)},
+    {.name = "cuArray3DCreate", .fn_ptr = cuArray3DCreate, .library_index=CUDA_ENTRY_ENUM(cuArray3DCreate)},
+    {.name = "cuMipmappedArrayCreate", .fn_ptr = cuMipmappedArrayCreate, .library_index=CUDA_ENTRY_ENUM(cuMipmappedArrayCreate)},
+    {.name = "cuDeviceTotalMem_v2", .fn_ptr = cuDeviceTotalMem_v2, .library_index=CUDA_ENTRY_ENUM(cuDeviceTotalMem_v2)},
+    {.name = "cuDeviceTotalMem", .fn_ptr = cuDeviceTotalMem, .library_index=CUDA_ENTRY_ENUM(cuDeviceTotalMem)},
+    {.name = "cuMemGetInfo_v2", .fn_ptr = cuMemGetInfo_v2, .library_index=CUDA_ENTRY_ENUM(cuMemGetInfo_v2)},
+    {.name = "cuMemGetInfo", .fn_ptr = cuMemGetInfo, .library_index=CUDA_ENTRY_ENUM(cuMemGetInfo)},
+    {.name = "cuLaunchKernel_ptsz", .fn_ptr = cuLaunchKernel_ptsz, .library_index=CUDA_ENTRY_ENUM(cuLaunchKernel_ptsz)},
+    {.name = "cuLaunchKernel", .fn_ptr = cuLaunchKernel, .library_index=CUDA_ENTRY_ENUM(cuLaunchKernel)},
+    {.name = "cuLaunch", .fn_ptr = cuLaunch, .library_index=CUDA_ENTRY_ENUM(cuLaunch)},
+    {.name = "cuLaunchCooperativeKernel_ptsz", .fn_ptr = cuLaunchCooperativeKernel_ptsz, .library_index=CUDA_ENTRY_ENUM(cuLaunchCooperativeKernel_ptsz)},
+    {.name = "cuLaunchCooperativeKernel", .fn_ptr = cuLaunchCooperativeKernel, .library_index=CUDA_ENTRY_ENUM(cuLaunchCooperativeKernel)},
+    {.name = "cuLaunchGrid", .fn_ptr = cuLaunchGrid, .library_index=CUDA_ENTRY_ENUM(cuLaunchGrid)},
+    {.name = "cuLaunchGridAsync", .fn_ptr = cuLaunchGridAsync, .library_index=CUDA_ENTRY_ENUM(cuLaunchGridAsync)},
+    {.name = "cuFuncSetBlockShape", .fn_ptr = cuFuncSetBlockShape, .library_index=CUDA_ENTRY_ENUM(cuFuncSetBlockShape)},
 };
 
 const int cuda_hook_nums =
@@ -640,6 +639,7 @@ CUresult cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion,
     for (i = 0; i < cuda_hook_nums; i++) {
       if (!strcmp(symbol, cuda_hooks_entry[i].name)) {
         LOGGER(5, "Match hook %s", symbol);
+        cuda_library_entry[cuda_hooks_entry[i].library_index].fn_ptr = *pfn;
         *pfn = cuda_hooks_entry[i].fn_ptr;
         break;
       }

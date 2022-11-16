@@ -109,6 +109,12 @@ typedef struct {
   void *fn_ptr;
   char *name;
 } entry_t;
+    
+typedef struct {
+  void *fn_ptr;
+  char *name;
+  int library_index;
+} hook_entry_t;
 
 typedef struct {
   int major;
